@@ -2,7 +2,7 @@ function App() {
 
   return (
     <>
-      <h1>Dashboard navidad</h1>
+      <h1 className=" text-red-600">Dashboard navidad</h1>
     </>
   )
 }
