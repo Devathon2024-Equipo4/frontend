@@ -1,10 +1,11 @@
-function App() {
+import AppRoutes from "./routes/AppRoutes";
 
+function App() {
   return (
     <>
-      <h1 className=" text-red-600">Dashboard navidad</h1>
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
