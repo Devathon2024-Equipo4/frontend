@@ -1,12 +1,12 @@
 import React from 'react'
 
-import HomePage from "./HomePage";
-import GpsPage from "./GpsPage";
-import ReindeerOrganizatorPage from "./ReindeerOrganizatorPage";
-import ElfRegistryPage from "./ElfRegistryPage";
-import ChildrenClassificatorPage from "./ChildrenClassificatorPage";
-import CaloryCounterPage from "./CaloryCounterPage";
-import LetterLectorPage from "./LetterLectorPage";
+import HomePage from "../pages/HomePage";
+import GpsPage from "../pages/GpsPage";
+import ReindeerOrganizatorPage from "../pages/ReindeerOrganizatorPage";
+import ElfRegistryPage from "../pages/ElfRegistryPage";
+import ChildrenClassificatorPage from "../pages/ChildrenClassificatorPage";
+import CaloryCounterPage from "../pages/CaloryCounterPage";
+import LetterLectorPage from "../pages/LetterLectorPage";
 
 const RoutesConfig = [
     { path: "/", element: <HomePage /> },
