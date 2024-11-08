@@ -1,0 +1,1 @@
+export const URI_TOTAL_CALORIES = "/calories/total";
