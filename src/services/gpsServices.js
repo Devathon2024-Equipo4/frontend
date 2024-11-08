@@ -10,3 +10,13 @@ export const create = async ({ address }) => {
   } 
 
 };
+
+export const getRecent = async() => {
+  try{
+    const response = await api.get(URI_GPS);
+    return response.data;
+  }catch(error){
+    throw new Error(error.response ? error.response.data : 'Unknown error');
+  } 
+
+};
