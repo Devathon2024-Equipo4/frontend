@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "@/utils/api";
 import { URI_GPS } from "./endpoints";
 
 export const create = async ({ address }) => {
