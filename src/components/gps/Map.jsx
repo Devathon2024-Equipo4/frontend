@@ -23,21 +23,23 @@ const MapContent = ({ position, name }) => {
 export const Map = () => {
   const coordinates = useGpsStore((state) => state.coordinates);
   const [position, setPosition] = useState([51.505, -0.09]);
-  const [popupName, setPopupName] = useState("");
+  const [popupName, setPopupName] = useState("London");
+  
 
   useEffect(() => {
-    if (coordinates.length > 0) {
+    if (Array.isArray(coordinates) && coordinates.length > 0 ) {
       const { lat, lon, name } = coordinates[0];
 
       if (lat && lon && name) {
         setPosition([lat, lon]);
         setPopupName(name);
+        
       }
     }
   }, [coordinates]);
 
   return (
-    <div className="h-[500px] w-[900px]">
+    <div className="h-[500px] w-[900px] mr-4">
       <MapContainer
         center={position}
         zoom={4}
@@ -51,7 +53,7 @@ export const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {coordinates.length > 0 && <MapContent position={position} name={popupName} />}
+        {Array.isArray(coordinates) && coordinates.length > 0 && <MapContent position={position} name={popupName} />}
       </MapContainer>
     </div>
   );
