@@ -1,21 +1,32 @@
 import { useState } from "react";
-import { useCreateAddress } from "../../hooks/gps/useCreateGps";
+import { useCreateAddress} from "../../hooks/gps/useCreateGps";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
+import { toast } from "sonner";
+
 
 export const Toolbar = () => {
   const [inputValue, setInputValue] = useState(""); 
   const { mutate,  isPending} = useCreateAddress();
+  const [shouldRefetch, setShouldRefetch] = useState(false);
+  
   const handleInputChange = (event) => {
     setInputValue(event.target.value); 
   };
   const handleSubmit = async (event) => {
     event.preventDefault(); 
+   
     try {
       await mutate(inputValue);
-    } catch (err) {
-      console.error("Error al guardar la dirección", err);
+      toast.success("Dirección guardada"); 
+      setShouldRefetch(prev => !prev);
+    } catch (error) {
+    
+      toast.error("Error al guardar la dirección");
+     ;
     }
+    
+    
   };
   return (
     <nav className="flex items-center justify-center h-10 p-1.5 bg-[#594f4d]">

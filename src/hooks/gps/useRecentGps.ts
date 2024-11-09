@@ -1,42 +1,28 @@
-import { useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { getRecent } from "../../services/gpsServices"; 
 
-export const useCreateAddress = () => {
-  const [data, setData] = useState(null);
+export const useRecentGps = (shouldRefetch) => {
+  const [data, setData] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [status, setStatus] = useState(null);
+  
 
-  const isPending = status === "pending";
-  const isSuccess = status === "success";
-  const isError = status === "error";
-  const isSettled = status === "settled";
+  useEffect(() => {
+    
+    const fetchRecentGps = async () => {
+      setIsLoading(true);
+      try {
+        const response = await getRecent();
+        setData(response);
+      } catch (error) {
+        setError(error.response ? error.response.data : 'Unknown error');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const mutate = useCallback(async (address) => {
-    try {
-      setData(null);
-      setError(null);
-      setStatus("pending");
+    fetchRecentGps();
+  }, [shouldRefetch]); 
 
-      const response = await getRecent();
-      setData(response);
-      setStatus("success");
-      return response;
-    } catch (error) {
-      setStatus("error");
-      setError(error);
-      throw error;
-    } finally {
-      setStatus("settled");
-    }
-  }, []);
-
-  return {
-    mutate,
-    data,
-    error,
-    isPending,
-    isSuccess,
-    isError,
-    isSettled,
-  };
-};
+  return { data, isLoading, error };
+};  

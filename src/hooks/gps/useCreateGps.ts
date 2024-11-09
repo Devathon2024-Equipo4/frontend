@@ -9,7 +9,6 @@ export const useCreateAddress = () => {
   const isPending = status === 'pending';
   const isSuccess = status === 'success';
   const isError = status === 'error';
-  const isSettled = status === 'settled';
 
   const mutate = useCallback(async (address) => {
     try {
@@ -21,13 +20,11 @@ export const useCreateAddress = () => {
       setData(response);
       setStatus('success');
       return response;
-    } catch (error) {
+    } catch (err) {
       setStatus('error');
-      setError(error);
-      throw error; 
-    } finally {
-      setStatus('settled');
-    }
+      setError(err.response ? err.response.data : 'Error desconocido'); 
+      throw err; 
+    } 
   }, []);
 
   return {
@@ -37,6 +34,5 @@ export const useCreateAddress = () => {
     isPending,
     isSuccess,
     isError,
-    isSettled,
   };
 };
