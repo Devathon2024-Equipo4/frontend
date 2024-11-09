@@ -10,7 +10,7 @@ export const useCreateAddress = () => {
   const isSuccess = status === 'success';
   const isError = status === 'error';
 
-  const mutate = useCallback(async (address) => {
+  const mutate = useCallback(async (address,{ onSuccess, onError }) => {
     try {
       setData(null);
       setError(null);
@@ -19,10 +19,16 @@ export const useCreateAddress = () => {
       const response = await create({ address });
       setData(response);
       setStatus('success');
+      if (onSuccess) {
+        onSuccess(response);
+      }
       return response;
     } catch (err) {
       setStatus('error');
       setError(err.response ? err.response.data : 'Error desconocido'); 
+      if (onError) {
+        onError(err);
+      }
       throw err; 
     } 
   }, []);

@@ -16,15 +16,14 @@ export const Toolbar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); 
    
-    try {
-      await mutate(inputValue);
-      toast.success("Dirección guardada"); 
-      setShouldRefetch(prev => !prev);
-    } catch (error) {
-    
-      toast.error("Error al guardar la dirección");
-     ;
-    }
+    await mutate(inputValue, {
+      onSuccess: () => {
+        toast.success("Dirección guardada");
+      },
+      onError: (error) => {
+        toast.error("Error al guardar la dirección");
+      }
+    });
     
     
   };
