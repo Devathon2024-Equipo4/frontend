@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
-import { create } from '../../services/gpsServices'; 
+import { create } from '@/services/gpsServices'; 
+import { useGpsStore } from '@/stores/gpsStore';
 
 export const useCreateAddress = () => {
+  const setCoordinates = useGpsStore((state) => state.setCoordinates);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
@@ -18,6 +20,7 @@ export const useCreateAddress = () => {
 
       const response = await create({ address });
       setData(response);
+      setCoordinates(response.coordinates);
       setStatus('success');
       if (onSuccess) {
         onSuccess(response);
