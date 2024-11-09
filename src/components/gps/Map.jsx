@@ -7,7 +7,7 @@ const MapContent = ({ position, name }) => {
 
   useEffect(() => {
     if (map && position) {
-      map.setView(position, 4); 
+      map.setView(position, 10); 
     }
   }, [position, map]);
 
@@ -22,7 +22,9 @@ const MapContent = ({ position, name }) => {
 
 export const Map = () => {
   const coordinates = useGpsStore((state) => state.coordinates);
-  const [position, setPosition] = useState([51.505, -0.09]);
+  const position = useGpsStore((state) => state.position);
+  const setPosition = useGpsStore((state) => state.setPosition);
+  
   const [popupName, setPopupName] = useState("London");
   
 
@@ -42,7 +44,7 @@ export const Map = () => {
     <div className="h-[500px] w-[900px] mr-4">
       <MapContainer
         center={position}
-        zoom={4}
+        zoom={10}
         scrollWheelZoom={true}
         style={{
           height: "100%",
