@@ -5,12 +5,10 @@ const GpsApi = (set) => ({
   addresses : [],
   address: "",
   setAddress: (value) => set({ address: value }, false, "SET_GPS_ADDRESS"),
-  addAddress: (newAddress) => set((state) => ({
-    addresses: [...state.addresses, newAddress] 
-  }), false, "ADD_GPS_ADDRESS"),
+  setAddresses: (newAddresses) => set({ addresses: newAddresses }, false, "SET_GPS_ADDRESSES"),
 });
 
-export const useGPSStore = create(
+export const useGpsStore = create(
   devtools(
     persist(GpsApi, {
       name: "gps-store",

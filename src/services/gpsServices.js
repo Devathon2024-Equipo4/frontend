@@ -16,7 +16,7 @@ export const getRecent = async() => {
     const response = await api.get(URI_GPS);
     return response.data;
   }catch(error){
-    throw new Error(error.response ? error.response.data : 'Unknown error');
+    throw new Error(error.response ? error.response.data : 'Error 500');
   } 
 
 };

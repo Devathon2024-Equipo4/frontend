@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useCreateAddress} from "../../hooks/gps/useCreateGps";
+import { useCreateAddress} from "@/hooks/gps/useCreateGps";
+import { useRecentGps } from "@/hooks/gps/useRecentGps";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import { toast } from "sonner";
 
-
 export const Toolbar = () => {
   const [inputValue, setInputValue] = useState(""); 
   const { mutate,  isPending} = useCreateAddress();
-  const [shouldRefetch, setShouldRefetch] = useState(false);
+  const { fetchRecentGps } = useRecentGps();
+ 
   
   const handleInputChange = (event) => {
     setInputValue(event.target.value); 
@@ -19,6 +20,7 @@ export const Toolbar = () => {
     await mutate(inputValue, {
       onSuccess: () => {
         toast.success("Dirección guardada");
+        fetchRecentGps();
       },
       onError: (error) => {
         toast.error("Error al guardar la dirección");
