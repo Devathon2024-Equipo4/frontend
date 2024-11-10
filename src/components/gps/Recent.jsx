@@ -1,6 +1,7 @@
 import { useRecentGps } from "@/hooks/gps/useRecentGps";
 import { useEffect } from "react";
 import { useGpsStore } from "@/stores/gpsStore";
+import { Loader } from "lucide-react";
  
 export const Recent = () => {
   const setPosition = useGpsStore((state) => state.setPosition);
@@ -11,7 +12,11 @@ export const Recent = () => {
   }, [coordinates]);
  
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className=" flex flex-col items-center justify-center mx-4 w-6/12">
+        <Loader className="animate-spin size-5 text-muted-foreground  " />
+      </div>
+    );
   }
 
   if (error) {
@@ -23,7 +28,7 @@ export const Recent = () => {
      <h3>Resultados:</h3>
         <ul  className="">
           {Array.isArray(coordinates) && coordinates.length > 0 && coordinates.map((result, index) => (
-            <li key={index}  className="max-h-72 overflow-y-auto border border-gray-300 rounded-md bg-white shadow-lg hover:bg-slate-300/80">
+            <li key={index}  className="max-h-72 mb-2 overflow-y-auto border border-plantation  rounded-md bg-akaroa shadow-lg hover:bg-akaroa/80">
               <button onClick={() => {
                 setPosition([result.lat, result.lon]);
               
