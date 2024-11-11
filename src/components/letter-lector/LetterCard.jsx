@@ -35,7 +35,7 @@ const LetterCard = ({ item, toggleStatus, onShowDetail, loading }) => {
         onClick={() => {
           onShowDetail(item);
         }}
-        className="bg-donJuan text-white border-plantation hover:border-white hover:bg-donJuan/50 rounded-full border-2 py-2 px-4 mt-2"
+        className="bg-donJuan text-white border-donJuan hover:border-white hover:bg-donJuan/50 rounded-full border-2 py-2 px-4 mt-2"
       >
         Leer carta
       </button>
