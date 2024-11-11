@@ -55,7 +55,7 @@ export default {
         akaroa: "#dabfaa",
         donJuan: "#594f4d",
         plantation: "#223d47",
-        loblolly: "#bc32c8",
+        loblolly: "#b3c2c8",
         baliHai: "#759ab0",
         grany: "#7e9d9a",
       },
