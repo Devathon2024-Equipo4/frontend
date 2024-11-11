@@ -5,8 +5,8 @@ const LetterCard = ({ item, toggleStatus, onShowDetail, loading }) => {
   return (
     <div
       className={`${
-        item.status ? "bg-akaroa" : "bg-white"
-      } text-donJuan p-4 rounded-md border-2 border-plantation font-DynaPuff w-50 min-h-40 relative`}
+        item.status ? "bg-loblolly/50 border-plantation" : "bg-akaroa border-stiletto"
+      } text-donJuan p-4 rounded-md border-2 font-DynaPuff w-50 min-h-40 relative`}
     >
       {!item.status &&
         <img
@@ -16,7 +16,7 @@ const LetterCard = ({ item, toggleStatus, onShowDetail, loading }) => {
           alt="new-letter"
         />
       }
-      <p className={`text-xl ${item.status ? "" : "text-plantation"}`}>
+      <p className={`text-xl text-plantation ${item.status ? "" : "text-stiletto"}`}>
         {"Carta para Santa"}
       </p>
       <p>Leída: {item.status ? "Si" : "No"}</p>
