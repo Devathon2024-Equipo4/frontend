@@ -1,9 +1,23 @@
-import React from 'react'
+import { Toolbar } from "@/components/gps/Toolbar";
+
+import { Recent } from "@/components/gps/Recent";
+import { Map } from "@/components/gps/Map";
 
 const GpsPage = () => {
+  
   return (
-    <div className='w-full min-h-[calc(100vh-64px)]'>GpsPage</div>
-  )
-}
+    <>
+      <div className="w-full min-h-[calc(100vh-64px)] flex flex-col bg-gray ">
+        <Toolbar />
+        <div className="flex-1 w-full flex flex-col justify-center items-center">
+          <div className="flex justify-center ">
+            <Recent />
+            <Map />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default GpsPage
+export default GpsPage;
