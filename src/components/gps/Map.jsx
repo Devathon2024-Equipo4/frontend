@@ -7,7 +7,7 @@ const MapContent = ({ position, name }) => {
 
   useEffect(() => {
     if (map && position) {
-      map.setView(position, 10); 
+      map.setView(position, 12); 
     }
   }, [position, map]);
 
@@ -38,13 +38,13 @@ export const Map = () => {
         
       }
     }
-  }, [coordinates]);
+  }, [coordinates, setPosition, setPopupName]);
 
   return (
     <div className="h-[500px] w-[900px] mr-4">
       <MapContainer
         center={position}
-        zoom={10}
+        zoom={12}
         scrollWheelZoom={true}
         style={{
           height: "100%",
