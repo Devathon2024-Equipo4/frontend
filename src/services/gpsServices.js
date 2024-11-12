@@ -1,5 +1,5 @@
 import api from "@/utils/api";
-import { URI_GPS } from "./endpoints";
+import { URI_GPS, URL_IP_API } from "./endpoints";
 
 export const create = async ({ address }) => {
   try{
@@ -29,6 +29,20 @@ export const getRecent = async() => {
     } else {
       throw new Error('Error en la configuración de la solicitud: ' + error.message);
     }
-  } 
+  }
+};
 
+export const getIpDetails = async () =>{
+  try {
+    const response = await api.get(URL_IP_API);
+    return response.data;
+  }catch(error){
+    if (error.response) {
+      throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
+    } else if (error.request) {
+      throw new Error('No se recibió respuesta del servidor');
+    } else {
+      throw new Error('Error en la configuración de la solicitud: ' + error.message);
+    }
+  }
 };

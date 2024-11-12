@@ -24,6 +24,7 @@ export const Map = () => {
   const coordinates = useGpsStore((state) => state.coordinates);
   const position = useGpsStore((state) => state.position);
   const setPosition = useGpsStore((state) => state.setPosition);
+  const ipDetails = useGpsStore((state) => state.ipDetails);
   
   const [popupName, setPopupName] = useState("London");
   
@@ -37,8 +38,11 @@ export const Map = () => {
         setPopupName(name);
         
       }
+    }else {
+      setPosition([ipDetails.latitude, ipDetails.longitude]);
+      setPopupName(ipDetails.city);
     }
-  }, [coordinates, setPosition, setPopupName]);
+  }, [coordinates, setPosition, setPopupName, ipDetails]);
 
   return (
     <div className="h-[500px] w-[900px] mr-4">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useGpsStore } from "@/stores/gpsStore";
+import { getIpDetails } from "@/services/gpsServices";
 
 export const useGetIpDetails = () => {
   const setIpDetails = useGpsStore((state) => state.setIpDetails);
@@ -11,7 +12,8 @@ export const useGetIpDetails = () => {
     setIsLoading(true);
     try {
       const response = await getIpDetails();
-      setIpDetails(response.ipDetails);
+      console.log(response)
+      setIpDetails(response);
     } catch (error) {
       setIsError(error ? error.message : 'Malformed error');
     } finally {

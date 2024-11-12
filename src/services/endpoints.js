@@ -4,3 +4,4 @@ export const URI_LETTERS = "/letter";
 export const URI_WEATHER = "/weather";
 export const URI_REINDEER_ORGANIZATOR = "/reindeers";
 export const URI_COOKIES = "/calories";
+export const URL_IP_API = "https://ipapi.co/json/";

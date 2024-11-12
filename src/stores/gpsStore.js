@@ -3,8 +3,6 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 const GpsApi = (set) => ({
   ipDetails: [],
-  latitude: 0.00,
-  longitude: 0.00, 
   addresses : [],
   coordinates: [],
   position: [51.505, -0.09],
