@@ -12,7 +12,6 @@ export const useGetIpDetails = () => {
     setIsLoading(true);
     try {
       const response = await getIpDetails();
-      console.log(response)
       setIpDetails(response);
     } catch (error) {
       setIsError(error ? error.message : 'Malformed error');

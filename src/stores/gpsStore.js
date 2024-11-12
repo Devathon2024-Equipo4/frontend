@@ -18,7 +18,7 @@ export const useGpsStore = create(
   devtools(
     persist(GpsApi, {
       name: "gps-store",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     })
   )
 );

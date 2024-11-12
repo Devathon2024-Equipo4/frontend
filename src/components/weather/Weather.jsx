@@ -26,6 +26,9 @@ export const Weather = () => {
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold">Weather</h1>
+        <pre>
+          {JSON.stringify(weather)}
+        </pre>
       </div>
     </div>
   );
