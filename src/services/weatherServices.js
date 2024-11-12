@@ -5,9 +5,7 @@ import { URI_WEATHER } from "./endpoints";
 
 export const getWeather = async (query) => {
   try{
-    const response = await api.get(URI_WEATHER, {
-      params: query
-    });
+    const response = await api.get(`${URI_WEATHER}/${query}`);
     return response.data;
   }catch(error){
     if (error.response) {

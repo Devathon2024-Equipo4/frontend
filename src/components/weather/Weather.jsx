@@ -16,7 +16,7 @@ export const Weather = () => {
   if (isError) {
     return ( 
       <div className=" flex flex-col items-center justify-center" >
-        <TriangleAlertIcon className="size-4" />
+        <TriangleAlertIcon className="size-5 text-red-500" />
         {isError}
       </div>
     );
@@ -25,9 +25,10 @@ export const Weather = () => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="text-center">
-        <h1 className="text-4xl font-bold">Weather</h1>
+        <h1 className="text-2xl font-bold">Weather</h1>
         <pre>
-          {JSON.stringify(weather)}
+        <pre>{JSON.stringify(weather, null, 2)}</pre>
+
         </pre>
       </div>
     </div>

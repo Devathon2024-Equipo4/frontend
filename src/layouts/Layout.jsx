@@ -14,7 +14,7 @@ const Layout = () => {
 
   useEffect(() => {
     
-    if (!Array.isArray(ipDetails) || ipDetails.length === 0) {
+    if (ipDetails.length === 0) {
       memoizedFetchIpDetails();
     }
   }, [memoizedFetchIpDetails, ipDetails]);

@@ -13,19 +13,24 @@ const ipDetails = useGpsStore((state) => state.ipDetails)
 const fetchWeather = useCallback(async () => {
   setIsLoading(true)
   try {
-    console.log(ipDetails.country_name)
-    const response = await getWeather(ipDetails.country_name)
-    setWeather(response.weather)
+      
+      const response = await getWeather(ipDetails.country_name);
+      if (response.weather) {
+        setWeather(Object.values(response.weather));
+      } else {
+        throw new Error('La respuesta no contiene datos meteorológicos');
+      }
+    
   } catch (error) {
-    setIsError(error ? error.message : 'Malformed error');
+    setIsError(error ? error.message : 'Unknown error');
   } finally {
     setIsLoading(false)
   }
 },[setWeather, ipDetails])
 
 useEffect(() => {
-  fetchWeather()
-}, [fetchWeather])
+  fetchWeather();
+}, [fetchWeather]);
 
 
 return { weather, isLoading, isError, fetchWeather }

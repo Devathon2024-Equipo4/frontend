@@ -21,7 +21,9 @@ export const useGetIpDetails = () => {
   }, [setIpDetails]);
 
   useEffect(() => {
-    fetchIpDetails();
-  }, [fetchIpDetails]);
+    if (ipDetails.length === 0) {
+      fetchIpDetails();
+    }
+  }, [fetchIpDetails, ipDetails]);
   return { ipDetails, isLoading, isError, fetchIpDetails }
 }

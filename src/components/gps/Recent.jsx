@@ -1,5 +1,4 @@
 import { useRecentGps } from "@/hooks/gps/useRecentGps";
-import { useEffect } from "react";
 import { useGpsStore } from "@/stores/gpsStore";
 import { Loader } from "lucide-react";
 import { TriangleAlertIcon } from "lucide-react";
@@ -7,10 +6,6 @@ import { TriangleAlertIcon } from "lucide-react";
 export const Recent = () => {
   const setPosition = useGpsStore((state) => state.setPosition);
   const {  coordinates, isLoading, error } = useRecentGps();
-
-  useEffect (() => {
-    console.log(coordinates);
-  }, [coordinates]);
  
   if (isLoading) {
     return (
@@ -23,7 +18,7 @@ export const Recent = () => {
   if (error) {
     return ( 
       <div className=" flex items-center justify-center mx-4 w-6/12" >
-        <TriangleAlertIcon className="size-4 mr-4" />
+        <TriangleAlertIcon className="size-5 mr-4 text-red-500" />
         {error}
       </div>
     );
