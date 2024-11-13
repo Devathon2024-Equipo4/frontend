@@ -6,32 +6,26 @@ import { useGpsStore } from "@/stores/gpsStore"
 export const useGetWeather = () => {
 const setWeather = weatherStore((state) => state.setWeather)
 const weather = weatherStore((state) => state.weather)
-const [isLoading, setIsLoading] = useState(true)
+const [isLoading, setIsLoading] = useState(false)
 const [isError, setIsError] = useState(null)
-const ipDetails = useGpsStore((state) => state.ipDetails)
 
-const fetchWeather = useCallback(async () => {
-  setIsLoading(true)
+const fetchWeather = useCallback(async (coordinates) => {
+  setIsLoading(true);
+  setIsError(null); 
   try {
-      
-      const response = await getWeather(ipDetails.country_name);
-      if (response.weather) {
-        setWeather(Object.values(response.weather));
-      } else {
-        throw new Error('La respuesta no contiene datos meteorológicos');
-      }
-    
+    const response = await getWeather(`${coordinates.latitude},${coordinates.longitude}`);
+  
+    if (response.weather) {
+      setWeather(Object.values(response.weather));
+    } else {
+      throw new Error('La respuesta no contiene datos meteorológicos');
+    }
   } catch (error) {
-    setIsError(error ? error.message : 'Unknown error');
+    setIsError(error.message || 'Error desconocido');
   } finally {
-    setIsLoading(false)
+    setIsLoading(false);
   }
-},[setWeather, ipDetails])
-
-useEffect(() => {
-  fetchWeather();
-}, [fetchWeather]);
-
+}, [setWeather]);
 
 return { weather, isLoading, isError, fetchWeather }
 }

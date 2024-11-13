@@ -15,33 +15,37 @@ import { useGetIpDetails } from "@/hooks/gps/useGetIpDetails";
 import { useGpsStore } from "@/stores/gpsStore";
 
 export const Weather = () => {
-  const { isLoading, isError, weather } = useGetWeather();
+  const { isLoading, isError, weather, fetchWeather } = useGetWeather();
   const {t} = useTranslation();
   const { getTranslatedCondition } = useWeatherTranslation();
-  //apiIpJson
-  //const ipDetails = useGpsStore((state) => state.ipDetails)
-  //const { fetchIpDetails } = useGetIpDetails();
-
   
-  /*
-  const memoizedFetchIpDetails = useCallback(() => {
-    fetchIpDetails();
-  }, [fetchIpDetails]);
-
   useEffect(() => {
-    
-    if (ipDetails.length === 0) {
-      memoizedFetchIpDetails();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => { 
+          const { latitude, longitude } = position.coords;
+          fetchWeather({ latitude, longitude });
+        },
+        (error) => {
+          
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              alert("Geolocation permission denied.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("Location information is unavailable.");
+              break;
+            case error.TIMEOUT:
+              alert("The request to get user location timed out.");
+              break;
+            case error.UNKNOWN_ERROR:
+              alert("An unknown error occurred.");
+              break;
+          }
+        }
+      );
     }
-  }, [memoizedFetchIpDetails, ipDetails]);
-  */
-  if(!navigator.geolocation) {
-    return (
-      <div className=" flex flex-col items-center justify-center">
-        <p>Geolocation is not supported by your browser.</p>
-      </div>
-    );
-  }
+  }, [fetchWeather]);
 
   if (isLoading) {
     return (
@@ -62,7 +66,8 @@ export const Weather = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center mt-4">
-      <div className="text-center">
+      {Array.isArray(weather) && weather.length > 0 && (
+        <div className="text-center">
         <Card className="bg-[rgba(255,255,255,0.25)] backdrop-blur-[10px] shadow-lg p-4 ">
           <CardTitle>
             <div className="flex items-center justify-between">
@@ -117,6 +122,8 @@ export const Weather = () => {
           </CardContent>
         </Card>
       </div>
+      )}
+      
     </div>
   );
 };
