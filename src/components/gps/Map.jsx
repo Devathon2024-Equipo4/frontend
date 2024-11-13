@@ -32,13 +32,13 @@ export const Map = () => {
   useEffect(() => {
     if (Array.isArray(coordinates) && coordinates.length > 0 ) {
       const { lat, lon, name } = coordinates[0];
-
+      
       if (lat && lon && name) {
         setPosition([lat, lon]);
         setPopupName(name);
         
       }
-    }else {
+    }else if(ipDetails.latitude && ipDetails.longitude && ipDetails.city) {
       setPosition([ipDetails.latitude, ipDetails.longitude]);
       setPopupName(ipDetails.city);
     }

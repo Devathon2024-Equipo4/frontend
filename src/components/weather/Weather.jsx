@@ -9,11 +9,39 @@ import { DropletIcon } from "lucide-react";
 import { Cloud } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useWeatherTranslation } from './useWeatherTranslation';
+import { useEffect } from "react";
+import { useCallback } from "react";
+import { useGetIpDetails } from "@/hooks/gps/useGetIpDetails";
+import { useGpsStore } from "@/stores/gpsStore";
 
 export const Weather = () => {
-  const { isLoading, isError, weather, fetchWeather } = useGetWeather();
+  const { isLoading, isError, weather } = useGetWeather();
   const {t} = useTranslation();
   const { getTranslatedCondition } = useWeatherTranslation();
+  //apiIpJson
+  //const ipDetails = useGpsStore((state) => state.ipDetails)
+  //const { fetchIpDetails } = useGetIpDetails();
+
+  
+  /*
+  const memoizedFetchIpDetails = useCallback(() => {
+    fetchIpDetails();
+  }, [fetchIpDetails]);
+
+  useEffect(() => {
+    
+    if (ipDetails.length === 0) {
+      memoizedFetchIpDetails();
+    }
+  }, [memoizedFetchIpDetails, ipDetails]);
+  */
+  if(!navigator.geolocation) {
+    return (
+      <div className=" flex flex-col items-center justify-center">
+        <p>Geolocation is not supported by your browser.</p>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
