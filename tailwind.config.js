@@ -58,6 +58,8 @@ export default {
         loblolly: "#b3c2c8",
         baliHai: "#759ab0",
         grany: "#7e9d9a",
+        skyLight: "#57c1eb",
+        skyDark: "#246fa8",
       },
       fontFamily: {
         MountainsOfChristmas: ["Mountains of Christmas", "sans-serif"],
