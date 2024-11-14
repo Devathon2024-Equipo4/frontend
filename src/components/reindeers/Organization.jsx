@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { ReindeerIcon } from "./ReindeerIcon"
+import { ReindeerIcon } from "./ReindeerIcon";
 import { useDrag, useDrop } from 'react-dnd';
+import reindeerStore from '@/stores/reindeerStore';
 
 const ItemType = {
   REINDEER: 'reindeer',
 };
 
-const DraggableReindeer = ({ reno, index, moveReno }) => {
+const DraggableReindeer = ({ reindeer, index, moveReindeer }) => {
   const [, ref] = useDrag({
     type: ItemType.REINDEER,
     item: { index },
@@ -16,58 +16,55 @@ const DraggableReindeer = ({ reno, index, moveReno }) => {
     accept: ItemType.REINDEER,
     hover(item) {
       if (item.index !== index) {
-        moveReno(item.index, index);
-        item.index = index; // Update the index for the dragged item
+        moveReindeer(item.index, index);
+        item.index = index; 
       }
     },
   });
 
   return (
     <div ref={node => ref(drop(node))} className="mb-2">
-      <ReindeerIcon name={reno.name} />
+      <ReindeerIcon name={reindeer.name} />
     </div>
   );
 };
 
 export const Organization = () => {
-  const [renos, setRenos] = useState([
-    { id: '1', name: 'Rudolph' },
-    { id: '2', name: 'Dasher' },
-    { id: '3', name: 'Dancer' },
-    { id: '4', name: 'Vixen' },
-    { id: '5', name: 'Prancer' },
-    { id: '6', name: 'Cupid' },
-    { id: '7', name: 'Comet' },
-    { id: '8', name: 'Blitzen' },
-    { id: '9', name: 'Donner' },
-  ]);
+  const reindeers = reindeerStore((state) => state.reindeers);
+  const setReindeers = reindeerStore((state) => state.setReindeers);
 
-  const moveReno = (fromIndex, toIndex) => {
-    const updatedRenos = [...renos];
-    const [movedReno] = updatedRenos.splice(fromIndex, 1);
-    updatedRenos.splice(toIndex, 0, movedReno);
-    setRenos(updatedRenos);
+  const moveReindeer = (fromIndex, toIndex) => {
+    const updatedReindeer = [...reindeers];
+    const [movedReindeer] = updatedReindeer.splice(fromIndex, 1);
+    updatedReindeer.splice(toIndex, 0, movedReindeer);
+    setReindeers(updatedReindeer);
   };
 
   return (
-    <div className="flex flex-col items-center mt-4">
-      <DraggableReindeer reno={renos[0]} index={0} moveReno={moveReno} />
-      <div className="flex space-x-4">
-        <DraggableReindeer reno={renos[1]} index={1} moveReno={moveReno} />
-        <DraggableReindeer reno={renos[2]} index={2} moveReno={moveReno} />
-      </div>
-      <div className="flex space-x-4">
-        <DraggableReindeer reno={renos[3]} index={3} moveReno={moveReno} />
-        <DraggableReindeer reno={renos[4]} index={4} moveReno={moveReno} />
-      </div>
-      <div className="flex space-x-4">
-        <DraggableReindeer reno={renos[5]} index={5} moveReno={moveReno} />
-        <DraggableReindeer reno={renos[6]} index={6} moveReno={moveReno} />
-      </div>
-      <div className="flex space-x-4">
-        <DraggableReindeer reno={renos[7]} index={7} moveReno={moveReno} />
-        <DraggableReindeer reno={renos[8]} index={8} moveReno={moveReno} />
-      </div>
-    </div>
+    <>
+      {reindeers.length > 0 && (
+        <div className="flex flex-col items-center mt-4">
+          {reindeers[0] && (
+            <DraggableReindeer reindeer={reindeers[0]} index={0} moveReindeer={moveReindeer} />
+          )}
+          <div className="flex space-x-4">
+            {reindeers[1] && <DraggableReindeer reindeer={reindeers[1]} index={1} moveReindeer={moveReindeer} />}
+            {reindeers[2] && <DraggableReindeer reindeer={reindeers[2]} index={2} moveReindeer={moveReindeer} />}
+          </div>
+          <div className="flex space-x-4">
+            {reindeers[3] && <DraggableReindeer reindeer={reindeers[3]} index={3} moveReindeer={moveReindeer} />}
+            {reindeers[4] && <DraggableReindeer reindeer={reindeers[4]} index={4} moveReindeer={moveReindeer} />}
+          </div>
+          <div className="flex space-x-4">
+            {reindeers[5] && <DraggableReindeer reindeer={reindeers[5]} index={5} moveReindeer={moveReindeer} />}
+            {reindeers[6] && <DraggableReindeer reindeer={reindeers[6]} index={6} moveReindeer={moveReindeer} />}
+          </div>
+          <div className="flex space-x-4">
+            {reindeers[7] && <DraggableReindeer reindeer={reindeers[7]} index={7} moveReindeer={moveReindeer} />}
+            {reindeers[8] && <DraggableReindeer reindeer={reindeers[8]} index={8} moveReindeer={moveReindeer} />}
+          </div>
+        </div>
+      )}
+    </>
   );
-}
+};

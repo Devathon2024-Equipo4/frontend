@@ -93,7 +93,7 @@ export const Weather = () => {
                     <EyeIcon className="size-8" />
                     <span className="text-md">{weather[1].vis_km} km/</span>
                     <span className="text-md">
-                      {weather[1].vis_miles} miles
+                      {weather[1].vis_miles} mi
                     </span>
                   </div>
                 </div>

@@ -1,10 +1,13 @@
 import { useState, useCallback } from "react"
 import weatherStore from "@/stores/weatherStore"
 import { getWeather } from "@/services/weatherServices"
+import reindeerStore from "@/stores/reindeerStore"
 
 export const useGetWeather = () => {
 const setWeather = weatherStore((state) => state.setWeather)
 const weather = weatherStore((state) => state.weather)
+const reindeers = reindeerStore((state) => state.reindeers)
+const setReindeers = reindeerStore((state) => state.setReindeers)
 const [isLoading, setIsLoading] = useState(false)
 const [isError, setIsError] = useState(null)
 
@@ -18,6 +21,11 @@ const fetchWeather = useCallback(async (coordinates) => {
       setWeather(Object.values(response.weather));
     } else {
       throw new Error('La respuesta no contiene datos meteorológicos');
+    }
+    if (response.reindeers) {
+      setReindeers(Object.values(response.reindeers));
+    } else {
+      throw new Error('La respuesta no contiene datos de los renos');
     }
   } catch (error) {
     setIsError(error.message || 'Error desconocido');
