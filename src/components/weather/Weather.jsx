@@ -10,9 +10,6 @@ import { Cloud } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useWeatherTranslation } from './useWeatherTranslation';
 import { useEffect } from "react";
-import { useCallback } from "react";
-import { useGetIpDetails } from "@/hooks/gps/useGetIpDetails";
-import { useGpsStore } from "@/stores/gpsStore";
 
 export const Weather = () => {
   const { isLoading, isError, weather, fetchWeather } = useGetWeather();
@@ -65,11 +62,11 @@ export const Weather = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center mt-4">
+    <div className="w-auto h-auto flex flex-col  mt-4">
       {Array.isArray(weather) && weather.length > 0 && (
-        <div className="text-center">
+        
         <Card className="bg-[rgba(255,255,255,0.25)] backdrop-blur-[10px] shadow-lg p-4 ">
-          <CardTitle>
+          <CardTitle className="mb-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col items-start">
                 <span className="text-md">{weather[0].name}</span>
@@ -121,7 +118,7 @@ export const Weather = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
+     
       )}
       
     </div>

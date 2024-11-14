@@ -79,7 +79,7 @@ const WeatherIcon = ({code}) => {
   const IconComponent = iconMap[code] || null;
 
   return (
-    <div className="bg-gradient-to-b from-skyLight to-skyDark w-14 h-14 p-2 flex items-center justify-center rounded-sm">
+    <div className="bg-gradient-to-b from-skyLight to-skyDark w-20 h-20 p-2 flex items-center justify-center rounded-sm">
       {IconComponent ? <IconComponent /> : <p>Icono no disponible</p>}
     </div>
   );

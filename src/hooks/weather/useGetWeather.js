@@ -1,7 +1,6 @@
-import { useEffect, useState, useCallback } from "react"
+import { useState, useCallback } from "react"
 import weatherStore from "@/stores/weatherStore"
 import { getWeather } from "@/services/weatherServices"
-import { useGpsStore } from "@/stores/gpsStore"
 
 export const useGetWeather = () => {
 const setWeather = weatherStore((state) => state.setWeather)
