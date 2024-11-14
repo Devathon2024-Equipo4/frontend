@@ -5,8 +5,8 @@ const LetterCard = ({ item, toggleStatus, onShowDetail, loading }) => {
   return (
     <div
       className={`${
-        item.status ? "bg-loblolly/50 border-plantation" : "bg-akaroa border-stiletto"
-      } text-donJuan p-4 rounded-md border-2 font-DynaPuff w-50 min-h-40 relative`}
+        item.status ? "bg-loblolly/50 border-plantation shadow-plantation/50" : "bg-akaroa border-stiletto shadow-stiletto/50"
+      } text-donJuan p-4 rounded-md border-2 font-DynaPuff w-50 min-h-40 relative shadow-lg`}
     >
       {!item.status &&
         <img
