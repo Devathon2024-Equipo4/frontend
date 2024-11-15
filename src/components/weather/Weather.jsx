@@ -62,10 +62,10 @@ export const Weather = () => {
   }
 
   return (
-    <div className="w-auto h-auto flex flex-col  mt-4">
+    <div className="w-fit h-auto flex flex-col  mt-4">
       {Array.isArray(weather) && weather.length > 0 && (
         
-        <Card className="bg-[rgba(255,255,255,0.25)] backdrop-blur-[10px] shadow-lg p-4 ">
+        <Card className="bg-loblolly/50 border-plantation shadow-plantation/50 text-donJuan p-4 shadow-lg ">
           <CardTitle className="mb-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col items-start">
