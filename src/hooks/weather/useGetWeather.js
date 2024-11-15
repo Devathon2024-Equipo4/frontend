@@ -9,7 +9,7 @@ const weather = weatherStore((state) => state.weather)
 const reindeers = reindeerStore((state) => state.reindeers)
 const setReindeers = reindeerStore((state) => state.setReindeers)
 const [isLoading, setIsLoading] = useState(false)
-const [isError, setIsError] = useState(null)
+const [Error, setError] = useState(null)
 
 const fetchWeather = useCallback(async (coordinates) => {
   setIsLoading(true);
@@ -34,5 +34,5 @@ const fetchWeather = useCallback(async (coordinates) => {
   }
 }, [setWeather]);
 
-return { weather, isLoading, isError, fetchWeather }
+return { weather, isLoading, Error, fetchWeather }
 }

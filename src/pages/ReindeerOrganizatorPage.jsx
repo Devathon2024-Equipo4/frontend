@@ -1,5 +1,6 @@
 import ButtonBack from "@/components/ButtonBack";
 import { Organization } from "@/components/reindeers/Organization";
+import { ReeinderTable } from "@/components/reindeers/ReindeerTable";
 import SledSVG from "@/components/reindeers/SledSVG";
 import { Weather } from "@/components/weather/Weather";
 import { DndProvider } from "react-dnd";
@@ -20,6 +21,7 @@ const ReindeerOrganizatorPage = () => {
           </DndProvider>
         </div>
       </div>
+      <ReeinderTable />
     </div>
   );
 };
