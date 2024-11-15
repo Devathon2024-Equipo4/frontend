@@ -12,7 +12,7 @@ import { useWeatherTranslation } from './useWeatherTranslation';
 import { useEffect } from "react";
 
 export const Weather = () => {
-  const { isLoading, isError, weather, fetchWeather } = useGetWeather();
+  const { isLoading, Error, weather, fetchWeather } = useGetWeather();
   const {t} = useTranslation();
   const { getTranslatedCondition } = useWeatherTranslation();
   
@@ -52,11 +52,11 @@ export const Weather = () => {
     );
   }
 
-  if (isError) {
+  if (Error) {
     return (
       <div className=" flex flex-col items-center justify-center">
         <TriangleAlertIcon className="size-5 text-red-500" />
-        {isError}
+        {Error}
       </div>
     );
   }

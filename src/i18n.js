@@ -62,6 +62,11 @@ i18n
           moderateOrHeavyRainWithThunder: "Moderate or heavy rain with thunder",
           patchyLightSnowWithThunder: "Patchy light snow with thunder",
           moderateOrHeavySnowWithThunder: "Moderate or heavy snow with thunder",
+          "alignment": {
+            alignmentManager: "Alignment Manager",
+            enterName: "Enter name",
+            save: "Save",
+          },
         },
       },
       es: {
@@ -121,6 +126,12 @@ i18n
           moderateOrHeavyRainWithThunder: "Lluvia moderada o fuerte con tormentas",
           patchyLightSnowWithThunder: "Nieve ligera con tormentas",
           moderateOrHeavySnowWithThunder: "Nieve moderada o fuerte con tormentas",
+          "alignment":{
+            alignmentManager: "Administrador de alineación",
+            enterName: "Ingrese el nombre",
+            save: "Guardar",
+          }
+          
           
         },
       },

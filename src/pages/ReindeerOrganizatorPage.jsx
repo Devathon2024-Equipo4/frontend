@@ -1,4 +1,5 @@
 import ButtonBack from "@/components/ButtonBack";
+import { AlignmentManager } from "@/components/reindeers/AlignmentManager";
 import { Organization } from "@/components/reindeers/Organization";
 import { ReeinderTable } from "@/components/reindeers/ReindeerTable";
 import SledSVG from "@/components/reindeers/SledSVG";
@@ -14,14 +15,14 @@ const ReindeerOrganizatorPage = () => {
         <Weather />
       </div>
       <div className="  flex items-center justify-center">
-        <div className="w-fit bg-akaroa border-stiletto shadow-stiletto/50 shadow-lg p-4 flex items-center rounded-lg border ">
+        <div className="w-fit bg-akaroa border-stiletto shadow-stiletto/50 shadow-lg p-4 flex items-center rounded-lg border mb-10 ">
           <SledSVG />
           <DndProvider backend={HTML5Backend}>
             <Organization />
           </DndProvider>
         </div>
       </div>
-      <ReeinderTable />
+      <AlignmentManager />
     </div>
   );
 };

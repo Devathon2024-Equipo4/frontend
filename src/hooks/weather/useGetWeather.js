@@ -13,7 +13,7 @@ const [Error, setError] = useState(null)
 
 const fetchWeather = useCallback(async (coordinates) => {
   setIsLoading(true);
-  setIsError(null); 
+  setError(null); 
   try {
     const response = await getWeather(`${coordinates.latitude},${coordinates.longitude}`);
   
@@ -28,7 +28,7 @@ const fetchWeather = useCallback(async (coordinates) => {
       throw new Error('La respuesta no contiene datos de los renos');
     }
   } catch (error) {
-    setIsError(error.message || 'Error desconocido');
+    setError(error.message || 'Error desconocido');
   } finally {
     setIsLoading(false);
   }

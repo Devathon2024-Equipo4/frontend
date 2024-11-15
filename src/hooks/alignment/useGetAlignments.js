@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { useCallback } from "react";
 import alignmentStore from "@/stores/alignmentStore"
-import { get } from "http";
 import { getAlignments } from "@/services/alignmentService";
-
-
-
 
 export const useGetAlignments = () => {
   const alignments = alignmentStore((state) => state.alignments);
@@ -31,5 +27,5 @@ export const useGetAlignments = () => {
     }
   }, [setAlignments]);
 
-  return { alignments, fetchAlignments };
+  return { alignments, isLoading, Error, fetchAlignments };
 };
