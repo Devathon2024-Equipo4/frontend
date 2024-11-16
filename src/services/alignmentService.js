@@ -45,3 +45,20 @@ export const removeAlignment = async (id) => {
     }
   }
 };
+
+export const updateAlignment = async (data) => {
+    try {
+      const { id, name } = data.data;
+      
+      const response = await api.put(`${URI_ALIGNMENTS}/${id}`, { name });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
+      } else if (error.request) {
+        throw new Error('No se recibió respuesta del servidor');
+      } else {
+        throw new Error('Error en la configuración de la solicitud: ' + error.message);
+      }
+    }
+  };  

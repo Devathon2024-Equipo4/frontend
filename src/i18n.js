@@ -70,6 +70,7 @@ i18n
             saveAlignment: "Save alignment",
             alignmentRemoved: "Alignment removed",
             alignmentRelationRemoved: "Alignment relation removed",
+            renameThisAlignment: "Rename this alignment",
           },
           "useConfirm": {
             areYouSure: "Are you sure?",
@@ -142,6 +143,7 @@ i18n
             saveAlignment: "Guardar alineación",
             alignmentRemoved: "Alineación eliminada",
             alignmentRelationRemoved: "Relación de alineación eliminada",
+            renameThisAlignment: "Renombrar esta alineación",
           },
           "useConfirm": { 
             areYouSure: "¿Estás seguro?",

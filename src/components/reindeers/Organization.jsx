@@ -1,6 +1,7 @@
 import { ReindeerIcon } from "./ReindeerIcon";
 import { useDrag, useDrop } from 'react-dnd';
 import reindeerStore from '@/stores/reindeerStore';
+import { motion } from 'framer-motion';
 
 const ItemType = {
   REINDEER: 'reindeer',
@@ -23,9 +24,18 @@ const DraggableReindeer = ({ reindeer, index, moveReindeer }) => {
   });
 
   return (
-    <div ref={node => ref(drop(node))} className="mb-2">
+    <motion.div 
+      ref={node => ref(drop(node))} 
+      className="mb-2"
+      initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  exit={{ opacity: 0, scale: 0.8 }}
+  transition={{ duration: 0.3 }}
+    >
+    
       <ReindeerIcon name={reindeer.name} />
-    </div>
+ 
+    </motion.div>
   );
 };
 
@@ -45,29 +55,29 @@ export const Organization = () => {
     setReindeers(updatedReindeer);
   };
 
+  const columns = [[], [], [], [], []]; // 5 columnas
+  reindeers.forEach((reindeer, index) => {
+    if (index < 10) { // Limita a 10 reindeers
+      columns[Math.floor(index / 2)].push(reindeer); // Cada columna tiene 2 elementos
+    }
+  });
+
   return (
     <>
       {reindeers.length > 0 && (
         <div className="flex flex-row items-center">
-          
-          <div className="flex flex-col space-y-4">
-           
-            {reindeers[8] && <DraggableReindeer reindeer={reindeers[8]} index={8} moveReindeer={moveReindeer} />}
-            {reindeers[7] && <DraggableReindeer reindeer={reindeers[7]} index={7} moveReindeer={moveReindeer} />}
-          </div>
-          <div className="flex flex-col space-y-4">
-            {reindeers[6] && <DraggableReindeer reindeer={reindeers[6]} index={6} moveReindeer={moveReindeer} />}
-            {reindeers[5] && <DraggableReindeer reindeer={reindeers[5]} index={5} moveReindeer={moveReindeer} />}
-          </div>
-          <div className="flex flex-col space-y-4">
-            {reindeers[4] && <DraggableReindeer reindeer={reindeers[4]} index={4} moveReindeer={moveReindeer} />}
-            {reindeers[3] && <DraggableReindeer reindeer={reindeers[3]} index={3} moveReindeer={moveReindeer} />}
-          </div>
-          <div className="flex flex-col space-y-4">
-            {reindeers[2] && <DraggableReindeer reindeer={reindeers[2]} index={2} moveReindeer={moveReindeer} />}
-            {reindeers[1] && <DraggableReindeer reindeer={reindeers[1]} index={1} moveReindeer={moveReindeer} />}
-          </div>
-          {reindeers[0] && <DraggableReindeer reindeer={reindeers[0]} index={0} moveReindeer={moveReindeer} />}
+          {columns.map((column, colIndex) => (
+            <div key={colIndex} className="flex flex-col space-y-4">
+              {column.map((reindeer, index) => (
+                <DraggableReindeer 
+                  key={reindeer.id} // Asegúrate de que cada reindeer tenga un id único
+                  reindeer={reindeer} 
+                  index={colIndex * 2 + index} // Calcula el índice correcto
+                  moveReindeer={moveReindeer} 
+                />
+              ))}
+            </div>
+          ))}
         </div>
       )}
     </>

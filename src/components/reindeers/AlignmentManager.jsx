@@ -14,6 +14,8 @@ import { useGetAlignmentRelation } from "@/hooks/alignment/useGetAlignmentRelati
 import { useRemoveAlignmentRelation } from "@/hooks/alignment/useRemoveAlignmentRelation";
 import { useRemoveAlignment } from "@/hooks/alignment/useRemoveAlignment";
 import { useUpdateAlignmentRelation } from "@/hooks/alignment/useUpdateAlignmentRelation";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { useUpdateAlignment } from "@/hooks/alignment/useUpdateAlignment";
 
 export const AlignmentManager = () => {
   const { t } = useTranslation();
@@ -34,6 +36,8 @@ export const AlignmentManager = () => {
     message: t("useConfirm.thisWillRemoveTheAlignmentAndAllItsData"),
   });
   const [name, setName] = useState("");
+  const [editOpen, setEditOpen] = useState(false);
+  const [value, setValue] = useState("");
   const { mutate: createAlignment, isPending: isCreateAlignment } =
     useCreateAlignment();
   const {
@@ -46,8 +50,12 @@ export const AlignmentManager = () => {
   } = useRemoveAlignmentRelation();
   const { mutate: removeAlignment, isPending: isRemoveAlignment } =
     useRemoveAlignment();
-  const { mutate: updateAlignmentRelation, isPending: isUpdateAlignmentRelation } =
-    useUpdateAlignmentRelation();
+  const {
+    mutate: updateAlignmentRelation,
+    isPending: isUpdateAlignmentRelation,
+  } = useUpdateAlignmentRelation();
+  const { mutate: updateAlignment, isPending: isUpdateAlignment } =
+    useUpdateAlignment();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,7 +117,7 @@ export const AlignmentManager = () => {
           },
         }
       );
-    }catch (error) {
+    } catch (error) {
       toast.error("Error al eliminar la alineación en la relacion");
     }
   };
@@ -124,16 +132,35 @@ export const AlignmentManager = () => {
             fetchAlignments();
           },
           onError: () => {
-            toast.error(
-              "Error al eliminar la alineación en la base de datos"
-            );
+            toast.error("Error al eliminar la alineación en la base de datos");
           },
         }
       );
-    }catch (error) {
+    } catch (error) {
       toast.error("Error al eliminar la alineación en la base de datos");
     }
-  }
+  };
+
+  const handleUpdateAlignment = async (id) => {
+    try {
+      const data = { id, name: value };
+      await updateAlignment(
+        { data },
+        {
+          onSuccess: () => {
+            toast.success(t("alignment.alignmentUpdated"));
+            setEditOpen(false);
+            fetchAlignments();  
+          },
+          onError: () => {
+            toast.error("Error al actualizar la alineación");
+          },
+        }
+      );
+    } catch (error) {
+      toast.error("Error al actualizar la alineación");
+    }
+  };
 
   if (isLoadingAlignments || isLoadingAlignmentRelation) {
     return (
@@ -170,25 +197,67 @@ export const AlignmentManager = () => {
         </form>
         <ul>
           {alignments.map((alignment) => (
-            <li key={alignment.id} className="flex items-center gap-x-2">
+            <li
+              key={alignment.id}
+              className="flex items-center gap-x-2 space-y-2"
+            >
               <span
                 className="cursor-pointer text-2xl"
                 onClick={() => handleGetAlignmentsRelation(alignment.id)}
               >
                 {alignment.name}
               </span>
-              <Button onClick={() => handleEdit(alignment)} variant="outline">
-                Edit
-              </Button>
+              <Dialog open={editOpen} onOpenChange={setEditOpen}>
+                <DialogTrigger asChild>
+                  <div className="px-4 py-2 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-[#1264a3]  font-semibold">
+                        Edit
+                      </p>
+                    </div>
+                   
+                  </div>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>{t("alignment.renameThisAlignment")}</DialogTitle>
+                  </DialogHeader>
+                  <form className="space-y-4 " onSubmit={(e) => {e.preventDefault();handleUpdateAlignment(alignment.id)}}>
+                    <Input
+                      value={value}
+                      disabled={false}
+                      onChange={(e) => setValue(e.target.value)}
+                      placeholder={t("alignment.enterName")}
+                      type="text"
+                      className="w-full"
+                      required
+                      autoFocus
+                      maxLength={30}
+                      minLength={3}
+                    />
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button
+                          variant="outline"
+                          disabled={false}
+                        >
+                          Cancel
+                        </Button>
+                      </DialogClose>
+                      <Button disabled={false} type="submit">
+                        Save
+                      </Button>
+                    </DialogFooter>
+                  </form>
+                </DialogContent>
+              </Dialog>
               <Button
                 onClick={() => handleRemove(alignment.id)}
                 variant="outline"
               >
                 Delete
               </Button>
-              <Button
-                onClick={() => handleSaveAlignmentRelation(alignment.id)}
-              >
+              <Button onClick={() => handleSaveAlignmentRelation(alignment.id)}>
                 {t("alignment.saveAlignment")}
               </Button>
             </li>
