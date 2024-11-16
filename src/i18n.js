@@ -69,6 +69,10 @@ i18n
             alignmentCreated: "Alignment created",
             saveAlignment: "Save alignment",
           },
+          "useConfirm": {
+            areYouSure: "Are you sure?",
+            thisWillRemoveTheAlignmentAndAllItsData: "This will delete the alignment and all its data. This action cannot be undone.",
+          },
         },
       },
       es: {
@@ -134,7 +138,11 @@ i18n
             save: "Guardar",
             alignmentCreated: "Alineación creada",
             saveAlignment: "Guardar alineación",
-          }
+          },
+          "useConfirm": { 
+            areYouSure: "¿Estás seguro?",
+            thisWillRemoveTheAlignmentAndAllItsData: "Esto eliminará la alineación y todos sus datos. Esta acción no se puede deshacer.",
+          },
           
           
         },
