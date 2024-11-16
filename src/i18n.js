@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 i18n
-  .use(initReactI18next) // Pasa i18n a react-i18next.
+  .use(initReactI18next) 
   .init({
     resources: {
       en: {
@@ -71,13 +71,32 @@ i18n
             alignmentRemoved: "Alignment removed",
             alignmentRelationRemoved: "Alignment relation removed",
             renameThisAlignment: "Rename this alignment",
+            deleteAlignment: "Delete alignment",
+            editAlignment: "Edit alignment",
+            cancel: "Cancel",
+            alignmentUpdated: "Alignment updated",
+            alignmentSaved: "Alignment saved",
           },
           "useConfirm": {
+            cancel: "Cancel",
+            confirm: "Confirm",
             areYouSure: "Are you sure?",
             thisWillRemoveTheAlignmentAndAllItsData: "This will delete the alignment and all its data. This action cannot be undone.",
           },
           "reindeerOrganizator": {
             title: "Reindeer Organizator",
+            
+          },
+          reindeer: {
+            theLeftLeaderBeforeTheArrivalOfRudolph: "The left leader before the arrival of Rudolph",
+            theRightLeaderBeforeRudolphsArrival: "The right leader before Rudolph's arrival.",
+            currentLeaderOfTheChristmasReindeer: "Current leader of the Christmas reindeer",
+            theMostBeautifulOfTheReindeerAndPossessingGreatEndurance: "The most beautiful of the reindeer and possessing great endurance",
+            theMostBeautifulOfTheReindeerAndPossessingGreatEndurance2: "considered the most beautiful, and of great resistance",
+            theReindeerInChargeOfSpreadingTheHappinessAndWonderThatSantaClausBrings: "the reindeer in charge of spreading the happiness and wonder that Santa Claus brings.",
+            theReindeerInChargeOfSpreadingTheLoveAndJoyThatSantaClausBrings: "the reindeer in charge of spreading the love and joy that Santa Claus brings.",
+            theReindeerThatRepresentsTheSpiritOfThunder: "the reindeer that represents the spirit of thunder.",
+            theReindeerThatRepresentsTheSpiritOfLightning: "the reindeer that represents the spirit of lightning.",
           },
         },
       },
@@ -147,13 +166,32 @@ i18n
             alignmentRemoved: "Alineación eliminada",
             alignmentRelationRemoved: "Relación de alineación eliminada",
             renameThisAlignment: "Renombrar esta alineación",
+            deleteAlignment: "Eliminar alineación",
+            editAlignment: "Editar alineación",
+            cancel: "Cancelar",
+            alignmentUpdated: "Alineación actualizada",
+            alignmentSaved: "Alineación guardada",
           },
           "useConfirm": { 
+            cancel: "Cancelar",
+            confirm: "Confirmar",
             areYouSure: "¿Estás seguro?",
             thisWillRemoveTheAlignmentAndAllItsData: "Esto eliminará la alineación y todos sus datos. Esta acción no se puede deshacer.",
           },
           "reindeerOrganizator": {
             title: "Organizador de Renos",
+            
+          },
+          "reindeer": {
+            theLeftLeaderBeforeTheArrivalOfRudolph: "El líder izquierdo antes de la llegada de Rudolph",
+            theRightLeaderBeforeRudolphsArrival: "El líder derecho antes de la llegada de Rudolph",
+            currentLeaderOfTheChristmasReindeer: "Líder actual de los renos de Navidad",
+            theMostBeautifulOfTheReindeerAndPossessingGreatEndurance: "El más hermoso de los renos y que posee una gran resistencia",
+            theMostBeautifulOfTheReindeerAndPossessingGreatEndurance2: "considerado el más hermoso y de gran resistencia",
+            theReindeerInChargeOfSpreadingTheHappinessAndWonderThatSantaClausBrings: "El reno en el que se encarga de propagar la felicidad y la maravilla que Santa Claus brinda.",
+            theReindeerInChargeOfSpreadingTheLoveAndJoyThatSantaClausBrings: "El reno que se encarga de propagar el amor y la alegría que Santa Claus brinda.",
+            theReindeerThatRepresentsTheSpiritOfThunder: "El reno que representa el espíritu del trueno.",
+            theReindeerThatRepresentsTheSpiritOfLightning: "El reno que representa el espíritu del relámpago.",
           },
           
           

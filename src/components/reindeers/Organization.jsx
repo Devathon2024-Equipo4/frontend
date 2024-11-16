@@ -2,6 +2,7 @@ import { ReindeerIcon } from "./ReindeerIcon";
 import { useDrag, useDrop } from 'react-dnd';
 import reindeerStore from '@/stores/reindeerStore';
 import { motion } from 'framer-motion';
+import { Hint } from "../Hint";
 
 const ItemType = {
   REINDEER: 'reindeer',
@@ -33,7 +34,7 @@ const DraggableReindeer = ({ reindeer, index, moveReindeer }) => {
   transition={{ duration: 0.3 }}
     >
     
-      <ReindeerIcon name={reindeer.name} />
+      <ReindeerIcon name={reindeer.name} description={reindeer.description} />
  
     </motion.div>
   );
@@ -55,13 +56,13 @@ export const Organization = () => {
     setReindeers(updatedReindeer);
   };
 
-  const columns = [[], [], [], [], []]; // 5 columnas
+  const columns = [[], [], [], [], []]; 
   reindeers.forEach((reindeer, index) => {
-    if (index < 10) { // Limita a 10 reindeers
-      columns[Math.floor(index / 2)].push(reindeer); // Cada columna tiene 2 elementos
+    if (index < 10) { 
+      columns[Math.floor(index / 2)].push(reindeer); 
     }
   });
-
+  
   return (
     <>
       {reindeers.length > 0 && (
@@ -69,12 +70,14 @@ export const Organization = () => {
           {columns.map((column, colIndex) => (
             <div key={colIndex} className="flex flex-col space-y-4">
               {column.map((reindeer, index) => (
+                
                 <DraggableReindeer 
-                  key={reindeer.id} // Asegúrate de que cada reindeer tenga un id único
+                  key={reindeer.id} 
                   reindeer={reindeer} 
-                  index={colIndex * 2 + index} // Calcula el índice correcto
+                  index={colIndex * 2 + index} 
                   moveReindeer={moveReindeer} 
                 />
+                
               ))}
             </div>
           ))}

@@ -21,6 +21,7 @@ import { memo } from "react";
 import { Trash2Icon } from "lucide-react";
 import { PencilIcon } from "lucide-react";
 import { SaveIcon } from "lucide-react";
+import { Hint } from "../Hint";
 
 const AlignmentManager = () => {
   const { t } = useTranslation();
@@ -91,7 +92,7 @@ const AlignmentManager = () => {
       { data },
       {
         onSuccess: () => {
-          toast.success(t("alignment.alignmentCreated"));
+          toast.success(t("alignment.alignmentSaved"));
           fetchAlignments();
         },
         onError: () => {
@@ -104,7 +105,7 @@ const AlignmentManager = () => {
   const handleGetAlignmentsRelation = async (alignmentId) => {
     await fetchAlignmentRelation(alignmentId);
   };
-  const handleRemoveAlignment = useCallback(async (alignmentId) => {
+  const handleRemoveAlignment = async (alignmentId) => {
     try {
       await removeAlignment(
         { id: alignmentId },
@@ -121,9 +122,9 @@ const AlignmentManager = () => {
     } catch (error) {
       toast.error("Error al eliminar la alineación en la base de datos");
     }
-  }, [removeAlignment, fetchAlignments]);
+  }
 
-  const handleRemove = useCallback(async (alignmentId) => {
+  const handleRemove = async (alignmentId) => {
     const ok = await confirm();
     if (!ok) return;
   
@@ -142,11 +143,11 @@ const AlignmentManager = () => {
     } catch (error) {
       toast.error("Error al eliminar la alineación en la relacion");
     }
-  }, [confirm, handleRemoveAlignment]);
+  }
 
   
 
-  const handleUpdateAlignment = useCallback(async (id) => {
+  const handleUpdateAlignment = async (id) => {
     try {
       const data = { id, name: value };
       await updateAlignment(
@@ -154,8 +155,9 @@ const AlignmentManager = () => {
         {
           onSuccess: () => {
             toast.success(t("alignment.alignmentUpdated"));
-            setEditOpen(false);
             fetchAlignments();
+            setEditOpen(false);
+            
           },
           onError: () => {
             toast.error("Error al actualizar la alineación");
@@ -165,7 +167,7 @@ const AlignmentManager = () => {
     } catch (error) {
       toast.error("Error al actualizar la alineación");
     }
-  }, [value, updateAlignment, fetchAlignments]);
+  }
 
   
 
@@ -207,10 +209,15 @@ const AlignmentManager = () => {
                 {alignment.name}
               </span>
               <div className="flex items-center gap-x-2">
+                
               <Dialog open={editOpen} onOpenChange={setEditOpen}>
+              <Hint label={t("alignment.editAlignment")} side="top" align="end">
                 <DialogTrigger asChild>
+                
                   <PencilIcon />
+                  
                 </DialogTrigger>
+                </Hint>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>{t("alignment.renameThisAlignment")}</DialogTitle>
@@ -234,18 +241,23 @@ const AlignmentManager = () => {
                           variant="outline"
                           disabled={false}
                         >
-                          Cancel
+                          {t("alignment.cancel")}
                         </Button>
                       </DialogClose>
                       <Button disabled={false} type="submit">
-                        Save
+                        {t("alignment.save")}
                       </Button>
                     </DialogFooter>
                   </form>
                 </DialogContent>
               </Dialog>
+              
+              <Hint label={t("alignment.deleteAlignment")} side="top" align="end">
               <Trash2Icon onClick={() => handleRemove(alignment.id)} className="text-red-800"/>
+              </Hint>
+              <Hint label={t("alignment.saveAlignment")} side="top" align="end">
               <SaveIcon onClick={() => handleSaveAlignmentRelation(alignment.id)} className="text-green-800"/>
+              </Hint>
               </div>
             </li>
           ))}

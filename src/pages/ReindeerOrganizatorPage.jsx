@@ -1,7 +1,6 @@
 import ButtonBack from "@/components/ButtonBack";
 import AlignmentManager from "@/components/reindeers/AlignmentManager";
 import { Organization } from "@/components/reindeers/Organization";
-import { ReeinderTable } from "@/components/reindeers/ReindeerTable";
 import SledSVG from "@/components/reindeers/SledSVG";
 import { Weather } from "@/components/weather/Weather";
 import { t } from "i18next";
