@@ -66,6 +66,8 @@ i18n
             alignmentManager: "Alignment Manager",
             enterName: "Enter name",
             save: "Save",
+            alignmentCreated: "Alignment created",
+            saveAlignment: "Save alignment",
           },
         },
       },
@@ -130,6 +132,8 @@ i18n
             alignmentManager: "Administrador de alineación",
             enterName: "Ingrese el nombre",
             save: "Guardar",
+            alignmentCreated: "Alineación creada",
+            saveAlignment: "Guardar alineación",
           }
           
           

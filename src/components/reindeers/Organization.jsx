@@ -38,9 +38,9 @@ export const Organization = () => {
     const [movedReindeer] = updatedReindeer.splice(fromIndex, 1);
     updatedReindeer.splice(toIndex, 0, movedReindeer);
     
-    /*updatedReindeer.forEach((reindeer, index) => {
-      reindeer.alignment = index; 
-    });*/
+    updatedReindeer.forEach((reindeer, index) => {
+      reindeer.order = index; 
+    });
 
     setReindeers(updatedReindeer);
   };

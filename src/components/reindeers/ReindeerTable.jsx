@@ -29,7 +29,7 @@ export const ReeinderTable = () => {
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Alignment</TableHead>
+          <TableHead>Order</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
@@ -38,7 +38,7 @@ export const ReeinderTable = () => {
         {reindeers.map((reindeer) => (
           <TableRow>
             <TableCell>
-              {reindeer.alignment}
+              {reindeer.order}
             </TableCell>
             <TableCell>
               {reindeer.name}

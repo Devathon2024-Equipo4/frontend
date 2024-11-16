@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCallback } from "react";
 import alignmentStore from "@/stores/alignmentStore"
 import { getAlignments } from "@/services/alignmentService";
+import { useEffect } from "react";
 
 export const useGetAlignments = () => {
   const alignments = alignmentStore((state) => state.alignments);
@@ -26,6 +27,10 @@ export const useGetAlignments = () => {
       setIsLoading(false);
     }
   }, [setAlignments]);
+
+  useEffect(() => {
+    fetchAlignments();
+  }, [fetchAlignments]);
 
   return { alignments, isLoading, Error, fetchAlignments };
 };
