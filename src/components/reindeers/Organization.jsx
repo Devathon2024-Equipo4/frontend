@@ -2,16 +2,29 @@ import { ReindeerIcon } from "./ReindeerIcon";
 import { useDrag, useDrop } from 'react-dnd';
 import reindeerStore from '@/stores/reindeerStore';
 import { motion } from 'framer-motion';
-import { Hint } from "../Hint";
+import { useState } from "react";
 
 const ItemType = {
   REINDEER: 'reindeer',
 };
 
 const DraggableReindeer = ({ reindeer, index, moveReindeer }) => {
-  const [, ref] = useDrag({
+  const [tooltipActive, setTooltipActive] = useState(true);
+
+  const [{ isDragging }, ref] = useDrag({
     type: ItemType.REINDEER,
-    item: { index },
+    item: () => ({ index }), 
+    collect: (monitor) => {
+      const dragging = monitor.isDragging();
+      if (dragging) {
+        setTooltipActive(false);
+      } else {
+      
+        setTooltipActive(true);
+      }
+      return { isDragging: dragging };
+    },
+    
   });
 
   const [, drop] = useDrop({
@@ -33,8 +46,16 @@ const DraggableReindeer = ({ reindeer, index, moveReindeer }) => {
   exit={{ opacity: 0, scale: 0.8 }}
   transition={{ duration: 0.3 }}
     >
-    
-      <ReindeerIcon name={reindeer.name} description={reindeer.description} />
+    {tooltipActive ? ( 
+      <div className="flex flex-col justify-center items-center">
+        <ReindeerIcon name={reindeer.name} description={reindeer.description} />
+      </div>
+        
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <ReindeerIcon name={reindeer.name} description="" /> 
+        </div>
+      )}
  
     </motion.div>
   );

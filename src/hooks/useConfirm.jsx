@@ -1,5 +1,5 @@
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -27,21 +27,21 @@ export const useConfirm = ({ title, message }) => {
     };
 
     const confirmDialog = () => (
-      <Dialog open={promise !== null} onClose={handleClose}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{message}</DialogDescription>
+      <AlertDialog open={promise !== null} >
+        <AlertDialogContent hideClose>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{title}</AlertDialogTitle>
+            <AlertDialogDescription>{message}</AlertDialogDescription>
             
-          </DialogHeader>
-          <DialogFooter className="pt-2 ">
+          </AlertDialogHeader>
+          <AlertDialogFooter className="pt-2 ">
             <Button variant="outline" onClick={handleCancel}>
               {t("useConfirm.cancel")}
             </Button>
             <Button onClick={handleConfirm}>{t("useConfirm.confirm")}</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     );
 
   return [confirmDialog, confirm];

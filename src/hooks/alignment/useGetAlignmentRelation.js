@@ -20,7 +20,8 @@ export const useGetAlignmentRelation = () => {
         const simplifiedReindeerData = response.relation.map(item => ({
           id: item.reindeerId,
           name: item.reindeer.name,
-          order: item.order
+          order: item.order,
+          description: item.reindeer.description
         })).sort((a, b) => a.order - b.order);
         setReindeers(simplifiedReindeerData);
       } else {
