@@ -13,6 +13,7 @@ import { useCreateAlignmentRelation } from "@/hooks/alignment/useCreateAlignment
 import { useGetAlignmentRelation } from "@/hooks/alignment/useGetAlignmentRelation";
 import { useRemoveAlignmentRelation } from "@/hooks/alignment/useRemoveAlignmentRelation";
 import { useRemoveAlignment } from "@/hooks/alignment/useRemoveAlignment";
+import { useUpdateAlignmentRelation } from "@/hooks/alignment/useUpdateAlignmentRelation";
 
 export const AlignmentManager = () => {
   const { t } = useTranslation();
@@ -45,6 +46,8 @@ export const AlignmentManager = () => {
   } = useRemoveAlignmentRelation();
   const { mutate: removeAlignment, isPending: isRemoveAlignment } =
     useRemoveAlignment();
+  const { mutate: updateAlignmentRelation, isPending: isUpdateAlignmentRelation } =
+    useUpdateAlignmentRelation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +58,7 @@ export const AlignmentManager = () => {
         onSuccess: () => {
           toast.success(t("alignment.alignmentCreated"));
           fetchAlignments();
+          setName("");
         },
         onError: () => {
           toast.error("Error al crear la alineación");
@@ -63,14 +67,14 @@ export const AlignmentManager = () => {
     );
   };
 
-  const handleCreateAlignmentRelation = async (alignmentId) => {
+  const handleSaveAlignmentRelation = async (alignmentId) => {
     const data = reindeers.map((reindeer) => ({
       order: reindeer.order,
       alignmentId: alignmentId,
       reindeerId: reindeer.id,
     }));
 
-    await createAlignmentRelation(
+    await updateAlignmentRelation(
       { data },
       {
         onSuccess: () => {
@@ -183,7 +187,7 @@ export const AlignmentManager = () => {
                 Delete
               </Button>
               <Button
-                onClick={() => handleCreateAlignmentRelation(alignment.id)}
+                onClick={() => handleSaveAlignmentRelation(alignment.id)}
               >
                 {t("alignment.saveAlignment")}
               </Button>

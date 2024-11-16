@@ -21,8 +21,7 @@ export const useGetAlignmentRelation = () => {
           id: item.reindeerId,
           name: item.reindeer.name,
           order: item.order
-        })).sort((a, b) => a.order - b.order);;
-        console.log(simplifiedReindeerData);
+        })).sort((a, b) => a.order - b.order);
         setReindeers(simplifiedReindeerData);
       } else {
         throw new Error('La respuesta no contiene datos de las alineaciones');
