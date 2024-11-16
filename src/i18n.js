@@ -68,6 +68,8 @@ i18n
             save: "Save",
             alignmentCreated: "Alignment created",
             saveAlignment: "Save alignment",
+            alignmentRemoved: "Alignment removed",
+            alignmentRelationRemoved: "Alignment relation removed",
           },
           "useConfirm": {
             areYouSure: "Are you sure?",
@@ -138,6 +140,8 @@ i18n
             save: "Guardar",
             alignmentCreated: "Alineación creada",
             saveAlignment: "Guardar alineación",
+            alignmentRemoved: "Alineación eliminada",
+            alignmentRelationRemoved: "Relación de alineación eliminada",
           },
           "useConfirm": { 
             areYouSure: "¿Estás seguro?",

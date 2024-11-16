@@ -13,6 +13,7 @@ import { useCreateAlignment } from "@/hooks/alignment/useCreateAlignment";
 import { useCreateAlignmentRelation } from "@/hooks/alignment/useCreateAlignmentRelation";
 import { useGetAlignmentRelation } from "@/hooks/alignment/useGetAlignmentRelation";
 import { useRemoveAlignmentRelation } from "@/hooks/alignment/useRemoveAlignmentRelation";
+import { useRemoveAlignment } from "@/hooks/alignment/useRemoveAlignment";
 
 export const AlignmentManager = () => {
   const { t } = useTranslation();
@@ -40,6 +41,10 @@ export const AlignmentManager = () => {
     mutate: removeAlignmentRelation,
     isPending: isRemoveAlignmentRelation,
   } = useRemoveAlignmentRelation();
+  const {
+    mutate: removeAlignment,
+    isPending: isRemoveAlignment,
+  } = useRemoveAlignment();
 
 
 
@@ -91,13 +96,22 @@ export const AlignmentManager = () => {
       return;
     }
     await removeAlignmentRelation({ id: alignmentId }, {
-      onSuccess: () => {
-        toast.success(t("alignment.alignmentRemoved"));
+      onSuccess: async () => {
+        toast.success(t("alignment.alignmentRelationRemoved"));
+        await removeAlignment({ id: alignmentId }, {
+          onSuccess: () => {
+            toast.success(t("alignment.alignmentRemoved"));
+          },
+          onError: () => {
+            toast.error("Error al eliminar la alineación en la base de datos");
+          },
+        });
       },
       onError: () => {
-        toast.error("Error al eliminar la alineación");
+        toast.error("Error al eliminar la alineación en la relacion");
       },
     });
+    
   };
 
   if (isLoadingAlignments || isLoadingAlignmentRelation) {
