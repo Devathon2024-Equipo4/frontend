@@ -76,6 +76,9 @@ i18n
             areYouSure: "Are you sure?",
             thisWillRemoveTheAlignmentAndAllItsData: "This will delete the alignment and all its data. This action cannot be undone.",
           },
+          "reindeerOrganizator": {
+            title: "Reindeer Organizator",
+          },
         },
       },
       es: {
@@ -148,6 +151,9 @@ i18n
           "useConfirm": { 
             areYouSure: "¿Estás seguro?",
             thisWillRemoveTheAlignmentAndAllItsData: "Esto eliminará la alineación y todos sus datos. Esta acción no se puede deshacer.",
+          },
+          "reindeerOrganizator": {
+            title: "Organizador de Renos",
           },
           
           

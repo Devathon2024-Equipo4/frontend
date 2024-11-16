@@ -16,8 +16,13 @@ import { useRemoveAlignment } from "@/hooks/alignment/useRemoveAlignment";
 import { useUpdateAlignmentRelation } from "@/hooks/alignment/useUpdateAlignmentRelation";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { useUpdateAlignment } from "@/hooks/alignment/useUpdateAlignment";
+import { useCallback } from "react";
+import { memo } from "react";
+import { Trash2Icon } from "lucide-react";
+import { PencilIcon } from "lucide-react";
+import { SaveIcon } from "lucide-react";
 
-export const AlignmentManager = () => {
+const AlignmentManager = () => {
   const { t } = useTranslation();
   const reindeers = reindeerStore((state) => state.reindeers);
   const {
@@ -99,30 +104,7 @@ export const AlignmentManager = () => {
   const handleGetAlignmentsRelation = async (alignmentId) => {
     await fetchAlignmentRelation(alignmentId);
   };
-
-  const handleRemove = async (alignmentId) => {
-    const ok = await confirm();
-    if (!ok) {
-      return;
-    }
-    try {
-      await removeAlignmentRelation(
-        { id: alignmentId },
-        {
-          onSuccess: async () => {
-            await handleRemoveAlignment(alignmentId);
-          },
-          onError: () => {
-            toast.error("Error al eliminar la alineación en la relacion");
-          },
-        }
-      );
-    } catch (error) {
-      toast.error("Error al eliminar la alineación en la relacion");
-    }
-  };
-
-  const handleRemoveAlignment = async (alignmentId) => {
+  const handleRemoveAlignment = useCallback(async (alignmentId) => {
     try {
       await removeAlignment(
         { id: alignmentId },
@@ -139,9 +121,32 @@ export const AlignmentManager = () => {
     } catch (error) {
       toast.error("Error al eliminar la alineación en la base de datos");
     }
-  };
+  }, [removeAlignment, fetchAlignments]);
 
-  const handleUpdateAlignment = async (id) => {
+  const handleRemove = useCallback(async (alignmentId) => {
+    const ok = await confirm();
+    if (!ok) return;
+  
+    try {
+      await removeAlignmentRelation(
+        { id: alignmentId },
+        {
+          onSuccess: async () => {
+            await handleRemoveAlignment(alignmentId);
+          },
+          onError: () => {
+            toast.error("Error al eliminar la alineación en la relacion");
+          },
+        }
+      );
+    } catch (error) {
+      toast.error("Error al eliminar la alineación en la relacion");
+    }
+  }, [confirm, handleRemoveAlignment]);
+
+  
+
+  const handleUpdateAlignment = useCallback(async (id) => {
     try {
       const data = { id, name: value };
       await updateAlignment(
@@ -150,7 +155,7 @@ export const AlignmentManager = () => {
           onSuccess: () => {
             toast.success(t("alignment.alignmentUpdated"));
             setEditOpen(false);
-            fetchAlignments();  
+            fetchAlignments();
           },
           onError: () => {
             toast.error("Error al actualizar la alineación");
@@ -160,15 +165,9 @@ export const AlignmentManager = () => {
     } catch (error) {
       toast.error("Error al actualizar la alineación");
     }
-  };
+  }, [value, updateAlignment, fetchAlignments]);
 
-  if (isLoadingAlignments || isLoadingAlignmentRelation) {
-    return (
-      <div className=" flex flex-col items-center justify-center">
-        <Loader className="animate-spin size-5 text-muted-foreground  " />
-      </div>
-    );
-  }
+  
 
   if (ErrorAlignments || ErrorAlignmentRelation) {
     return (
@@ -182,7 +181,7 @@ export const AlignmentManager = () => {
   return (
     <>
       <ConfirmDialog />
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 w-full ">
         <h2>{t("alignment.alignmentManager")}</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <Input
@@ -199,24 +198,18 @@ export const AlignmentManager = () => {
           {alignments.map((alignment) => (
             <li
               key={alignment.id}
-              className="flex items-center gap-x-2 space-y-2"
+              className="flex items-center justify-between gap-x-2 space-y-2"
             >
               <span
-                className="cursor-pointer text-2xl"
+                className="cursor-pointer text-xl"
                 onClick={() => handleGetAlignmentsRelation(alignment.id)}
               >
                 {alignment.name}
               </span>
+              <div className="flex items-center gap-x-2">
               <Dialog open={editOpen} onOpenChange={setEditOpen}>
                 <DialogTrigger asChild>
-                  <div className="px-4 py-2 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm text-[#1264a3]  font-semibold">
-                        Edit
-                      </p>
-                    </div>
-                   
-                  </div>
+                  <PencilIcon />
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
@@ -251,15 +244,9 @@ export const AlignmentManager = () => {
                   </form>
                 </DialogContent>
               </Dialog>
-              <Button
-                onClick={() => handleRemove(alignment.id)}
-                variant="outline"
-              >
-                Delete
-              </Button>
-              <Button onClick={() => handleSaveAlignmentRelation(alignment.id)}>
-                {t("alignment.saveAlignment")}
-              </Button>
+              <Trash2Icon onClick={() => handleRemove(alignment.id)} className="text-red-800"/>
+              <SaveIcon onClick={() => handleSaveAlignmentRelation(alignment.id)} className="text-green-800"/>
+              </div>
             </li>
           ))}
         </ul>
@@ -267,3 +254,5 @@ export const AlignmentManager = () => {
     </>
   );
 };
+
+export default memo(AlignmentManager);

@@ -62,7 +62,7 @@ export const Weather = () => {
   }
 
   return (
-    <div className="w-fit h-auto flex flex-col  mt-4">
+    <div className="w-fit h-auto flex flex-col  ">
       {Array.isArray(weather) && weather.length > 0 && (
         
         <Card className="bg-loblolly/50 border-plantation shadow-plantation/50 text-donJuan p-4 shadow-lg ">
