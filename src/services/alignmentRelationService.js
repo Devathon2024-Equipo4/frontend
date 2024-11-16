@@ -32,7 +32,7 @@ export const getAlignmentRelationId = async (id) => {
   }
 };
 
-export const deleteAlignmentRelation = async (id) => {
+export const removeAlignmentRelation = async (id) => {
   try {
     const response = await api.delete(`${URI_ALIGNMENT_RELATION}/${id}`);
     return response.data;

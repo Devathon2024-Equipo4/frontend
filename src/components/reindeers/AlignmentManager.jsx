@@ -1,16 +1,18 @@
-import { useGetAlignments } from "@/hooks/alignment/useGetAlignments";
+
 import { useState } from "react";
-import { Input } from "../ui/input";
 import { useTranslation } from "react-i18next";
+import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { useCreateAlignment } from "@/hooks/alignment/useCreateAlignment";
 import { Loader } from "lucide-react";
 import { TriangleAlertIcon } from "lucide-react";
 import reindeerStore from "@/stores/reindeerStore";
+import { useConfirm } from "@/hooks/useConfirm";
+import { useGetAlignments } from "@/hooks/alignment/useGetAlignments";
+import { useCreateAlignment } from "@/hooks/alignment/useCreateAlignment";
 import { useCreateAlignmentRelation } from "@/hooks/alignment/useCreateAlignmentRelation";
 import { useGetAlignmentRelation } from "@/hooks/alignment/useGetAlignmentRelation";
-import { useConfirm } from "@/hooks/useConfirm";
+import { useRemoveAlignmentRelation } from "@/hooks/alignment/useRemoveAlignmentRelation";
 
 export const AlignmentManager = () => {
   const { t } = useTranslation();
@@ -34,6 +36,12 @@ export const AlignmentManager = () => {
     mutate: createAlignmentRelation,
     isPending: isCreateAlignmentRelation,
   } = useCreateAlignmentRelation();
+  const {
+    mutate: removeAlignmentRelation,
+    isPending: isRemoveAlignmentRelation,
+  } = useRemoveAlignmentRelation();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,15 +90,14 @@ export const AlignmentManager = () => {
     if (!ok) {
       return;
     }
-    /*await removeAlignment({ id: alignmentId }, {
+    await removeAlignmentRelation({ id: alignmentId }, {
       onSuccess: () => {
         toast.success(t("alignment.alignmentRemoved"));
-        fetchAlignments();
       },
       onError: () => {
         toast.error("Error al eliminar la alineación");
       },
-    });*/
+    });
   };
 
   if (isLoadingAlignments || isLoadingAlignmentRelation) {
