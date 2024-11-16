@@ -10,12 +10,11 @@ export const useRemoveAlignmentRelation = () => {
   const isSuccess = status === "success";
   const isError = status === "error";
   
-  const mutate = useCallback(async(id,{onSuccess,onError}) => {
+  const mutate = useCallback(async(obj,{onSuccess,onError}) => {
     try{
       setError(null);
       setStatus("pending");
-
-      const response = await removeAlignmentRelation(id);
+      const response = await removeAlignmentRelation(obj.id);
       setStatus("success");
       if(onSuccess){
         onSuccess(response);

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Input } from "../ui/input";
@@ -29,7 +28,10 @@ export const AlignmentManager = () => {
     Error: ErrorAlignmentRelation,
     fetchAlignmentRelation,
   } = useGetAlignmentRelation();
-  const [ConfirmDialog, confirm] = useConfirm({ title:  t('useConfirm.areYouSure'), message: t('useConfirm.thisWillRemoveTheAlignmentAndAllItsData') });
+  const [ConfirmDialog, confirm] = useConfirm({
+    title: t("useConfirm.areYouSure"),
+    message: t("useConfirm.thisWillRemoveTheAlignmentAndAllItsData"),
+  });
   const [name, setName] = useState("");
   const { mutate: createAlignment, isPending: isCreateAlignment } =
     useCreateAlignment();
@@ -41,12 +43,8 @@ export const AlignmentManager = () => {
     mutate: removeAlignmentRelation,
     isPending: isRemoveAlignmentRelation,
   } = useRemoveAlignmentRelation();
-  const {
-    mutate: removeAlignment,
-    isPending: isRemoveAlignment,
-  } = useRemoveAlignment();
-
-
+  const { mutate: removeAlignment, isPending: isRemoveAlignment } =
+    useRemoveAlignment();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,24 +93,43 @@ export const AlignmentManager = () => {
     if (!ok) {
       return;
     }
-    await removeAlignmentRelation({ id: alignmentId }, {
-      onSuccess: async () => {
-        toast.success(t("alignment.alignmentRelationRemoved"));
-        await removeAlignment({ id: alignmentId }, {
-          onSuccess: () => {
-            toast.success(t("alignment.alignmentRemoved"));
+    try {
+      await removeAlignmentRelation(
+        { id: alignmentId },
+        {
+          onSuccess: async () => {
+            await handleRemoveAlignment(alignmentId);
           },
           onError: () => {
-            toast.error("Error al eliminar la alineación en la base de datos");
+            toast.error("Error al eliminar la alineación en la relacion");
           },
-        });
-      },
-      onError: () => {
-        toast.error("Error al eliminar la alineación en la relacion");
-      },
-    });
-    
+        }
+      );
+    }catch (error) {
+      toast.error("Error al eliminar la alineación en la relacion");
+    }
   };
+
+  const handleRemoveAlignment = async (alignmentId) => {
+    try {
+      await removeAlignment(
+        { id: alignmentId },
+        {
+          onSuccess: () => {
+            toast.success(t("alignment.alignmentRemoved"));
+            fetchAlignments();
+          },
+          onError: () => {
+            toast.error(
+              "Error al eliminar la alineación en la base de datos"
+            );
+          },
+        }
+      );
+    }catch (error) {
+      toast.error("Error al eliminar la alineación en la base de datos");
+    }
+  }
 
   if (isLoadingAlignments || isLoadingAlignmentRelation) {
     return (
@@ -132,7 +149,7 @@ export const AlignmentManager = () => {
   }
 
   return (
-    <>  
+    <>
       <ConfirmDialog />
       <div className="flex flex-col space-y-4">
         <h2>{t("alignment.alignmentManager")}</h2>
