@@ -15,7 +15,7 @@ export const useRecentGps = () => {
       const response = await getRecent();
       setAddresses(response.address); 
     } catch (error) {
-      setError(error.response ? error.response.data : 'Malformed error');
+      setError(error ? error.message : 'Malformed error');
     } finally {
       setIsLoading(false);
     }

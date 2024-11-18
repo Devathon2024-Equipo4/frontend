@@ -5,6 +5,7 @@ import { useCalories } from "@/hooks/calories-counter/useCalories";
 import CreateCookiesForm from "@/components/calories-counter/CreateCookiesForm";
 import AddCookiesForm from "@/components/calories-counter/AddCookiesForm";
 import DeleteCookiesForm from "@/components/calories-counter/DeleteCookiesForm";
+import ButtonBack from "@/components/ButtonBack";
 
 const CaloryCounterPage = () => {
   const {
@@ -35,7 +36,8 @@ const CaloryCounterPage = () => {
         <h1 className="text-stiletto text-3xl font-MountainsOfChristmas pt-10 text-center">
           Contador de calorias para Santa Claus
         </h1>
-        <Totals handleResetCalories={handleResetCalories} />
+        <ButtonBack/>
+        <Totals handleResetCalories={handleResetCalories}/>
         <Tabs
           defaultValue="create"
           className="w-full mt-10"

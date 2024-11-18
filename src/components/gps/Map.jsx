@@ -7,7 +7,7 @@ const MapContent = ({ position, name }) => {
 
   useEffect(() => {
     if (map && position) {
-      map.setView(position, 10); 
+      map.setView(position, 12); 
     }
   }, [position, map]);
 
@@ -24,6 +24,7 @@ export const Map = () => {
   const coordinates = useGpsStore((state) => state.coordinates);
   const position = useGpsStore((state) => state.position);
   const setPosition = useGpsStore((state) => state.setPosition);
+  const ipDetails = useGpsStore((state) => state.ipDetails);
   
   const [popupName, setPopupName] = useState("London");
   
@@ -31,20 +32,23 @@ export const Map = () => {
   useEffect(() => {
     if (Array.isArray(coordinates) && coordinates.length > 0 ) {
       const { lat, lon, name } = coordinates[0];
-
+      
       if (lat && lon && name) {
         setPosition([lat, lon]);
         setPopupName(name);
         
       }
+    }else if(ipDetails.latitude && ipDetails.longitude && ipDetails.city) {
+      setPosition([ipDetails.latitude, ipDetails.longitude]);
+      setPopupName(ipDetails.city);
     }
-  }, [coordinates]);
+  }, [coordinates, setPosition, setPopupName, ipDetails]);
 
   return (
     <div className="h-[500px] w-[900px] mr-4">
       <MapContainer
         center={position}
-        zoom={10}
+        zoom={12}
         scrollWheelZoom={true}
         style={{
           height: "100%",

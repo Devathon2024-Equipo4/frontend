@@ -52,7 +52,6 @@ export const Toolbar = () => {
         },
       });
     }else{
-      console.log(addresses);
       setRecentSearchesVisible(true);
     }
   }
