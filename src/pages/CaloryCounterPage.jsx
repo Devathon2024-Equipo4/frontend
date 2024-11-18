@@ -1,8 +1,10 @@
+import { Loader } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Totals from "@/components/calories-counter/Totals";
 import { useCalories } from "@/hooks/calories-counter/useCalories";
 import CreateCookiesForm from "@/components/calories-counter/CreateCookiesForm";
 import AddCookiesForm from "@/components/calories-counter/AddCookiesForm";
+import DeleteCookiesForm from "@/components/calories-counter/DeleteCookiesForm";
 
 const CaloryCounterPage = () => {
   const {
@@ -10,22 +12,40 @@ const CaloryCounterPage = () => {
     handleSubmitCreateCookie,
     handleSubmitAddCookies,
     cookies,
+    handleResetCalories,
+    handleDeleteCookie,
+    openDeleteDialog,
+    handleCloseDialog,
+    handleOpenDialog,
+    loading,
+    tabValue,
   } = useCalories();
+
+  if (loading) {
+    return (
+      <div className="flex flex-row items-center justify-center h-screen">
+        <Loader className="animate-spin size-5 text-muted-foreground" />
+        <p className="font-DynaPuff ml-2 text-base text-center">Cargando...</p>
+      </div>
+    );
+  }
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-gray font-DynaPuff">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-stiletto text-3xl font-MountainsOfChristmas pt-10 text-center">
           Contador de calorias para Santa Claus
         </h1>
-        <Totals />
+        <Totals handleResetCalories={handleResetCalories} />
         <Tabs
           defaultValue="create"
           className="w-full mt-10"
           onValueChange={handleChangeValueTab}
+          value={tabValue}
         >
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="create">Crear galleta</TabsTrigger>
             <TabsTrigger value="add">Agregar galletas</TabsTrigger>
+            <TabsTrigger value="delete">Eliminar galleta</TabsTrigger>
           </TabsList>
           <TabsContent value="create">
             <CreateCookiesForm handleSubmitForm={handleSubmitCreateCookie} />
@@ -34,6 +54,15 @@ const CaloryCounterPage = () => {
             <AddCookiesForm
               handleSubmitForm={handleSubmitAddCookies}
               cookies={cookies}
+            />
+          </TabsContent>
+          <TabsContent value="delete">
+            <DeleteCookiesForm
+              handleSubmitForm={handleDeleteCookie}
+              cookies={cookies}
+              open={openDeleteDialog}
+              handleCloseDialog={handleCloseDialog}
+              handleOpenDialog={handleOpenDialog}
             />
           </TabsContent>
         </Tabs>
