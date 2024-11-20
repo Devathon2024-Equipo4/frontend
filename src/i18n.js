@@ -100,6 +100,7 @@ i18n
           },
           elf: {
             title: "Elf Registry",
+            buttonDialog: "Register Elf",
           },
         },
       },
@@ -198,6 +199,7 @@ i18n
           },
           elf: {
             title: "Registro laboral de duendes",
+            buttonDialog: "Registrar Duende",
           },
           
         },

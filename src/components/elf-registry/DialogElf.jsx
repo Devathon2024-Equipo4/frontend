@@ -10,12 +10,9 @@ import {
 } from "@/components/ui/dialog"
 import ProfileForm from "./FormRegister"
 
-function DialogCloseButton() {
+const DialogElf = ({open, setOpen}) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="bg-green-600 hover:bg-green-700">Regristrar Duende</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-lg text-stiletto font-DynaPuff">Registro de Duendes</DialogTitle>
@@ -34,4 +31,4 @@ function DialogCloseButton() {
     </Dialog>
   )
 }
-export default DialogCloseButton
+export default DialogElf
