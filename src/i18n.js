@@ -98,6 +98,9 @@ i18n
             theReindeerThatRepresentsTheSpiritOfThunder: "the reindeer that represents the spirit of thunder.",
             theReindeerThatRepresentsTheSpiritOfLightning: "the reindeer that represents the spirit of lightning.",
           },
+          elf: {
+            title: "Elf Registry",
+          },
         },
       },
       es: {
@@ -193,7 +196,9 @@ i18n
             theReindeerThatRepresentsTheSpiritOfThunder: "El reno que representa el espíritu del trueno.",
             theReindeerThatRepresentsTheSpiritOfLightning: "El reno que representa el espíritu del relámpago.",
           },
-          
+          elf: {
+            title: "Registro laboral de duendes",
+          },
           
         },
       },
