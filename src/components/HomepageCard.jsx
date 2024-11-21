@@ -22,4 +22,4 @@ const HomepageCard = ({ route, title, source }) => {
   );
 };
 
-export default HomepageCard;
+export default HomepageCard
