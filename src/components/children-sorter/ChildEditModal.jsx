@@ -25,6 +25,7 @@ const ChildEditModal = ({
   const [points, setPoints] = useState();
   const [name, setName] = useState();
 
+
   const createChildBehavior = async (behaviorId, childId, points) => {
     try {
       if( !behaviorId || !points){
@@ -114,27 +115,28 @@ const ChildEditModal = ({
     }
   }
 
-  const editBehaviorChild = async (childId, behaviorId, NewBehaviorId, points) =>{
-    console.log("childId: " +childId);
-    console.log("NewBehaviorId: " +NewBehaviorId);
-    console.log("points: " +points);
+  const editBehaviorChild = async (childId, behaviorId, NewBehaviorId, points, behaviorData) =>{
+    // console.log("childId: " + childId);
+    // console.log("NewBehaviorId: " + NewBehaviorId);
+    // console.log("points: " + points);
 
-    try {
-      const result = await editChildbehavior(childId, behaviorId, {
-        childId: childId,
-        behaviorId: NewBehaviorId,
-        points: points,
-      });
-      result.success
-        ? toast.success("Comportamiento editado correctamente")
-        : toast.error(result.error);
-      await loadChildren();
-      setSelectedContent(await getChild(child.id));
-      //console.log(child);
-      console.log(await getChild(child.id));
-
-    } catch (err) {
-      toast.error(error || "Ocurrió un error al cambiar el nombre");
+    if (behaviorData) {
+      try {
+        const result = await editChildbehavior(childId, behaviorId, {
+          childId: childId,
+          behaviorId: NewBehaviorId,
+          points: points,
+        });
+        result.success
+          ? toast.success("Comportamiento editado correctamente")
+          : toast.error(result.error);
+        await loadChildren();
+        setSelectedContent(await getChild(child.id));
+        //console.log(child);
+        console.log(await getChild(child.id));
+      } catch (err) {
+        toast.error(error || "Ocurrió un error al cambiar el nombre");
+      }
     }
   }
 
@@ -265,10 +267,11 @@ const ChildEditModal = ({
                         behaviorChild.behaviorId,
                         // behaviorId,
                         behaviorChild.behaviorId,
-                        points
+                        points,
+                        behaviorData[behaviorChild.id]
                       );
                     }}
-                    className="text-green-900 cursor-pointer"
+                    className={`text-green-900 cursor-pointer`}
                   />
                   <Trash2
                     onClick={() => {
