@@ -63,8 +63,8 @@ const ChildrenList = () => {
   return (
     <div>
       <div className="rounded-md bg-stiletto text-white font-DynaPuff gap-4 justify-center">
-        <div className="flex-1 p-4">
-          <p className="text-center text-lg">
+        <div className="flex-1 p-4 pb-0">
+          <p className="text-center text-2xl">
             Criterio de clasificación
           </p>
         </div>
