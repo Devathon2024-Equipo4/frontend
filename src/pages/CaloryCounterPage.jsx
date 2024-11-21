@@ -33,7 +33,7 @@ const CaloryCounterPage = () => {
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-gray font-DynaPuff">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-stiletto text-3xl font-MountainsOfChristmas pt-10 text-center">
+        <h1 className="text-stiletto text-6xl font-MountainsOfChristmas pt-10 text-center">
           Contador de calorias para Santa Claus
         </h1>
         <ButtonBack/>

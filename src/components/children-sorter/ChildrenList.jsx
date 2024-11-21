@@ -69,7 +69,7 @@ const ChildrenList = () => {
           </p>
         </div>
         <div className="flex p-4 text-lg">
-          <p className="flex-1 text-center">{">= 75 : GOOD"}</p>
+          <p className="flex-1 text-center">{"+ 75 : GOOD"}</p>
           <p className="flex-1 text-center"> {"< 75 : BAD"}</p>
         </div>
       </div>
