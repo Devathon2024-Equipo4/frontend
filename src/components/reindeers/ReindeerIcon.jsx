@@ -8,23 +8,23 @@ export const ReindeerIcon = ({name, description}) => {
   if (name === 'Rudolph') {
     return (
       <>
-      <Hint label={getTranslatedCondition(description)} side="top" align="end">
-      <div className='w-32 h-40 flex flex-col justify-center items-center bg-transparent border border-gray-300 rounded-md p-2 mx-4'>
+      {/* <Hint label={getTranslatedCondition(description)} side="top" align="end"> */}
+      <div className='w-28 h-32 flex flex-col justify-center items-center bg-transparent border border-gray-300 rounded-md p-2 mx-4 cursor-pointer'>
         <RudolphSVG /> 
         <p>{name}</p>
       </div>
-      </Hint>
+      {/* </Hint> */}
       </>
     );
   }else {
     return (
       <>
-      <Hint label={getTranslatedCondition(description)} side="top" align="end">
-      <div className='w-32 h-40 flex flex-col justify-center items-center bg-transparent border border-gray-300 rounded-md p-2 mx-4'>
+      {/* <Hint label={getTranslatedCondition(description)} side="top" align="end"> */}
+      <div className='w-28 h-32 flex flex-col justify-center items-center bg-transparent border border-gray-300 rounded-md p-2 mx-4 cursor-pointer'>
         <ReindeerSVG2 />
         <p>{name}</p> 
       </div>
-      </Hint>
+      {/* </Hint> */}
       </>
     );
   }
