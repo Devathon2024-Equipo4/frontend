@@ -214,7 +214,7 @@ const AlignmentManager = () => {
               <Hint label={t("alignment.editAlignment")} side="top" align="end">
                 <DialogTrigger asChild>
                 
-                  <PencilIcon />
+                  <PencilIcon className="cursor-pointer" />
                   
                 </DialogTrigger>
                 </Hint>
@@ -253,10 +253,10 @@ const AlignmentManager = () => {
               </Dialog>
               
               <Hint label={t("alignment.deleteAlignment")} side="top" align="end">
-              <Trash2Icon onClick={() => handleRemove(alignment.id)} className="text-red-800"/>
+              <Trash2Icon onClick={() => handleRemove(alignment.id)} className="text-red-800 cursor-pointer"/>
               </Hint>
               <Hint label={t("alignment.saveAlignment")} side="top" align="end">
-              <SaveIcon onClick={() => handleSaveAlignmentRelation(alignment.id)} className="text-green-800"/>
+              <SaveIcon onClick={() => handleSaveAlignmentRelation(alignment.id)} className="text-green-800 cursor-pointer"/>
               </Hint>
               </div>
             </li>

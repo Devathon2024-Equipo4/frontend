@@ -62,23 +62,22 @@ export const Weather = () => {
   }
 
   return (
-    <div className="w-fit h-auto flex flex-col  ">
+    <div className="w-full h-auto flex flex-col mb-10 ">
       {Array.isArray(weather) && weather.length > 0 && (
-        
-        <Card className="bg-loblolly/50 border-plantation shadow-plantation/50 text-donJuan p-4 shadow-lg ">
+        <Card className="bg-loblolly/50 border-plantation shadow-plantation/50 text-donJuan p-4 shadow-lg flex flex-col md:flex-row items-center justify-center gap-5">
           <CardTitle className="mb-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center gap-5">
+            <WeatherIcon code={weather[1].condition.code} />
               <div className="flex flex-col items-start">
-                <span className="text-md">{weather[0].name}</span>
+                <span className="text-md">Clima local</span>
+                <span className="text-base">{weather[0].name}</span>
                 <span className="text-sm">{getTranslatedCondition(weather[1].condition.text)}</span>
               </div>
-
-              <WeatherIcon code={weather[1].condition.code} />
             </div>
           </CardTitle>
-          <CardContent>
-            <div className="flex flex-col space-y-6">
-              <div className="flex items-center justify-between">
+          <CardContent className="p-4">
+            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                 <div className="flex flex-col items-start ">
                   <span className="text-lg">{t('Wind')}</span>
                   <div className="flex items-center">
@@ -98,7 +97,7 @@ export const Weather = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-between space-x-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between space-x-6">
                 <div className="flex flex-col items-start ">
                   <div className="flex items-center">
                     <DropletIcon className="size-8" />
