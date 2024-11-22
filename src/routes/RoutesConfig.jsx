@@ -4,7 +4,7 @@ import HomePage from "../pages/HomePage";
 import GpsPage from "../pages/GpsPage";
 import ReindeerOrganizatorPage from "../pages/ReindeerOrganizatorPage";
 import ElfRegistryPage from "../pages/ElfRegistryPage";
-import ChildrenClassificatorPage from "../pages/ChildrenClassificatorPage";
+import ChildrenSorterPage from "../pages/ChildrenSorterPage";
 import CaloryCounterPage from "../pages/CaloryCounterPage";
 import LetterLectorPage from "../pages/LetterLectorPage";
 
@@ -15,8 +15,8 @@ const RoutesConfig = [
     { path: "/elfRegistry", element: <ElfRegistryPage /> },
     { path: "/caloryCounter", element: <CaloryCounterPage /> },
     {
-      path: "/childrenClassificator",
-      element: <ChildrenClassificatorPage />,
+      path: "/childrenSorter",
+      element: <ChildrenSorterPage />,
     },
     { path: "/letterLector", element: <LetterLectorPage /> },
   ]

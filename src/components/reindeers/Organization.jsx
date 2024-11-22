@@ -87,9 +87,9 @@ export const Organization = () => {
   return (
     <>
       {reindeers.length > 0 && (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-0">
           {columns.map((column, colIndex) => (
-            <div key={colIndex} className="flex flex-col space-y-4">
+            <div key={colIndex} className="flex flew-row md:flex-col">
               {column.map((reindeer, index) => (
                 
                 <DraggableReindeer 

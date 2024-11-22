@@ -5,17 +5,16 @@ import HomepageCard from "../components/HomepageCard";
 const HomePage = () => {
   return (
     <>
-      <div className="w-full min-h-[calc(100vh-64px)] bg-gray pt-10 px-20">
-        <h1 className=" text-stiletto font-MountainsOfChristmas text-center">
-          Dashboard navidad
+      <div className="w-full min-h-[calc(100vh-64px)] bg-gray pt-10 px-2 md:px-20">
+        <h1 className=" text-stiletto text-6xl font-bold font-MountainsOfChristmas text-center">
+          Dashboard Navidad
         </h1>
 
-        <div className="flex flex-row flex-wrap justify-center gap-10 items-center mt-10">
-          <HomepageCard
-            title={"Gps navideño"}
+        <div className="flex flex-row flex-wrap justify-between gap-10 items-start mt-10">
+          <HomepageCard 
+            title={"Gps"}
             route={"/gps"}
-            source={"/gps_icon.png"}
-          />
+            source={"/gps_icon.png"} />
           <HomepageCard
             title={"Organizador de renos"}
             route={"/reindeerOrg"}
@@ -23,7 +22,7 @@ const HomePage = () => {
           />
           <HomepageCard
             title={"Clasificador de niños"}
-            route={"/childrenClassificator"}
+            route={"/childrenSorter"}
             source={"/kid_icon.png"}
           />
           <HomepageCard
