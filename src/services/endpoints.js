@@ -7,3 +7,4 @@ export const URI_COOKIES = "/calories";
 export const URI_RESET_CALORIES = "/calories/reset";
 export const URI_ALIGNMENTS = "/alignment";
 export const URI_ALIGNMENT_RELATION = "/alignment-reindeer";
+export const URI_ELVES = "/elves";
