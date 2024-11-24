@@ -56,8 +56,8 @@ export function CardElf() {
           key={elf.id}
           className={`max-w-[350px] max-h-[350px] border-2 rounded-lg flex flex-col justify-between ${
             elf.status ===  "En nomina"
-            ? "bg-green-200 border-green-800 text-green-800"
-            : "bg-red-200 border-red-800 text-red-700"
+            ? "bg-loblolly/50 border-plantation shadow-plantation/50"
+            : "bg-akaroa border-stiletto shadow-stiletto/50"
           }`}
         >
           <CardHeader>
