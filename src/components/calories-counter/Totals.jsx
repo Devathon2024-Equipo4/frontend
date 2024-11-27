@@ -19,10 +19,10 @@ const Totals = ({ handleResetCalories }) => {
   const isResetDisabled = useMemo(() => totals.calories === 0, [totals]);
   return (
     <section className="text-white text-center">
-      <div className="bg-stiletto rounded-lg mb-5 ">
-      <div className="flex items-center justify-center gap-10 mt-10 p-5">
-        <AmountDisplay label="Total de calorias" quantity={totals.calories} />
-        <AmountDisplay label="Cantidad de galletas" quantity={totals.cookies} />
+      <div className="bg-stiletto rounded-lg mb-5 shadow-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-evenly gap-10 mt-10 p-2">
+        <AmountDisplay label="Calorías" quantity={totals.calories} img={"/calories/santa_calories.png"} />
+        <AmountDisplay label="Galletas" quantity={totals.cookies} img={"/calories/santa_cookies.png"} />
       </div>
       </div>
       <AlertDialog>
