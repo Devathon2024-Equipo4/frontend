@@ -14,7 +14,7 @@ const HomepageCard = ({ route, title, source }) => {
         </div>
       </Link>
       <img
-        className="absolute -top-4 -left-4 h-11 filter drop-shadow-[0_2px_1px_rgba(0,0,0,0.25)]"
+        className="absolute -top-5 -left-6 h-16 filter drop-shadow-[0_2px_1px_rgba(0,0,0,0.25)]"
         src={SantaHat}
         alt="santa-hat"
       />
