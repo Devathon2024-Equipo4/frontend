@@ -1,8 +1,9 @@
-const AmountDisplay = ({ label, quantity }) => {
+const AmountDisplay = ({ label, quantity, img }) => {
   return (
-    <div>
-      <p className="text-2xl">{label}</p>
+    <div className="grid grid-cols-2 grid-flow-row">
+       {img && <img src={`/img${img}`} alt={label} className="h-20 row-span-2" />}
       <p className="text-xl">{quantity}</p>
+      <p className="text-xl">{label}</p>
     </div>
   );
 };

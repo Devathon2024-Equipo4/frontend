@@ -32,7 +32,7 @@ const CaloryCounterPage = () => {
   }
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-gray font-DynaPuff">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-3">
         <h1 className="text-stiletto text-6xl font-MountainsOfChristmas pt-10 text-center">
           Contador de calorias para Santa Claus
         </h1>
@@ -40,11 +40,11 @@ const CaloryCounterPage = () => {
         <Totals handleResetCalories={handleResetCalories}/>
         <Tabs
           defaultValue="create"
-          className="w-full mt-10"
+          className="w-full mb-5 space-y-5"
           onValueChange={handleChangeValueTab}
           value={tabValue}
         >
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 h-fit bg-plantation text-white ">
             <TabsTrigger value="create">Crear galleta</TabsTrigger>
             <TabsTrigger value="add">Agregar galletas</TabsTrigger>
             <TabsTrigger value="delete">Eliminar galleta</TabsTrigger>
