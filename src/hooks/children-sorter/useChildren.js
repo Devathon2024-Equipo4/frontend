@@ -1,4 +1,4 @@
-import { getChildById, getTotalChildren, updateChild, updateStatusChild } from "@/services/childrenBehaviorService";
+import { createChild, deleteChild, getChildById, getTotalChildren, updateChild, updateStatusChild } from "@/services/childrenBehaviorService";
 import childrenStore from "@/stores/childrenStore";
 
 export const useChildren = () => {
@@ -84,6 +84,34 @@ export const useChildren = () => {
     }
   }
 
+  const addChild = async (child) =>{
+    setLoadingChild(true);
+    setError(null);
+    try {
+      const createdChild= await createChild(child);
+      //setData([...data, createdChild]);
+      await loadChildren();
+      return { success: true };
+    } catch (error) {
+      setError(error.message);
+      return { success: false, error: error.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteChildById = async (id) => {
+    setLoadingChild(true);
+    setError(null);
+    try {
+      await deleteChild(id);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
+    } finally {
+      setLoading(false);
+    }
+  };
   return {
     data,
     selectedChild,
@@ -94,6 +122,8 @@ export const useChildren = () => {
     loadChildren,
     getChild,
     updateStatusChildById,
-    editChild
+    editChild,
+    addChild,
+    deleteChildById
   };
 };

@@ -5,6 +5,11 @@ import ChildCard from './ChildCard';
 import { Loader } from "lucide-react";
 import { useBehavior } from '@/hooks/children-sorter/useBehavior';
 import ChildEditModal from './ChildEditModal';
+import { Hint } from '../Hint';
+import { Button } from '../ui/button';
+import AddChidForm from './AddChidForm';
+import { toast } from 'sonner';
+import ChildDeleteModal from './ChildDeleteModal';
 
 const ChildrenList = () => {
   const {
@@ -26,6 +31,10 @@ const ChildrenList = () => {
   } = useBehavior();
 
   const [selectedContent, setSelectedContent] = useState(null);
+
+  const [addChildFormOpen, setAddChildFormOpen] = useState(false);
+
+  const [deleteChildItem, setDeleteChildItem] = useState(null);
 
   useEffect(() => {
     loadChildren();
@@ -61,18 +70,31 @@ const ChildrenList = () => {
   if (error) return <p className="mt-10">Error: {error}</p>;
 
   return (
-    <div>
-      <div className="rounded-md bg-stiletto text-white font-DynaPuff gap-4 justify-center">
+    <div className="flex flex-col items-center">
+      <div className="rounded-md w-full bg-stiletto text-white font-DynaPuff gap-4 justify-center">
         <div className="flex-1 p-4 pb-0">
-          <p className="text-center text-2xl">
-            Criterio de clasificación
-          </p>
+          <p className="text-center text-2xl">Criterio de clasificación</p>
         </div>
         <div className="flex p-4 text-lg">
           <p className="flex-1 text-center">{"+ 75 : GOOD"}</p>
           <p className="flex-1 text-center"> {"< 75 : BAD"}</p>
         </div>
       </div>
+      <Hint label={"Registrar nuevo niño"} side="top" align="end">
+        <Button
+          onClick={() => {
+            //console.log(children.length );
+            if (children.length < 20) {
+              setAddChildFormOpen(true);
+            } else {
+              toast.info("Máximo 20 niños en la lista");
+            }
+          }}
+          className="mt-4 font-DynaPuff flex-grow-0 bg-donJuan border-donJuan border hover:border-white hover:bg-donJuan/50   tracking-wider px-6 py-4 h-12 rounded-lg text-white text-xl shadow-lg"
+        >
+          {"Agregar niño"}
+        </Button>
+      </Hint>
       <div className="flex flex-wrap justify-center md:justify-between items-start mt-5 gap-6">
         {children.map((item) => (
           <ChildCard
@@ -80,6 +102,7 @@ const ChildrenList = () => {
             item={item}
             getNameBehaviorById={getNameBehaviorById}
             onShowDetail={handleOpenModal}
+            setDeleteChildItem={setDeleteChildItem}
           />
         ))}
         <ChildEditModal
@@ -92,6 +115,21 @@ const ChildrenList = () => {
           loadingChild={loadingChild}
           getChild={getChild}
           updateStatusChildById={updateStatusChildById}
+        />
+
+        <AddChidForm
+          addChildFormOpen={addChildFormOpen}
+          onClose={() => {
+            setAddChildFormOpen(false);
+          }}
+        />
+
+        <ChildDeleteModal
+          deleteChildItem={deleteChildItem}
+          child={deleteChildItem}
+          onClose={() => {
+            setDeleteChildItem(null);
+          }}
         />
       </div>
     </div>

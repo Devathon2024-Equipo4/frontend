@@ -1,6 +1,8 @@
 import React from 'react'
+import { Pencil } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
-const ChildCard = ({ item, getNameBehaviorById, onShowDetail }) => {
+const ChildCard = ({ item, getNameBehaviorById, onShowDetail, setDeleteChildItem }) => {
   return (
     <div
       className={`
@@ -43,10 +45,19 @@ const ChildCard = ({ item, getNameBehaviorById, onShowDetail }) => {
         onClick={() => {
           onShowDetail(item);
         }}
-        className="bg-donJuan text-white border-donJuan hover:border-white hover:bg-donJuan/50 rounded-full border-2 py-2 px-4 mt-2"
+        className="flex gap-x-2 w-full justify-center bg-plantation text-white border-donJuan hover:border-white hover:bg-plantation/50 rounded-full border-2 py-2 px-4 mt-2"
       >
+        <Pencil className='w-4'/>
         Editar datos
       </button>
+      <button
+        onClick={() => {setDeleteChildItem(item)}}
+        className="flex gap-x-2 w-full justify-center bg-stiletto text-white border-donJuan hover:border-white hover:bg-stiletto/50 rounded-full border-2 py-2 px-4 mt-2"
+      >
+        <Trash2 className='w-4'/>
+        Borrar niño
+      </button>
+
     </div>
   );
 };
