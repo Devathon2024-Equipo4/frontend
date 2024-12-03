@@ -3,9 +3,10 @@ import { useCallback } from "react";
 import elvesStore from "@/stores/elvesStore"
 import {getElves} from "@/services/elfService";
 import { useEffect } from "react";
+import { useShallow } from "zustand/shallow";
 
 export const useGetElves = () => {
-  const elves = elvesStore((state) => state.elves);
+  const elves = elvesStore(useShallow(state => state.elves));
   const setElves = elvesStore((state) => state.setElves);
   const [isLoading, setIsLoading] = useState(false);
   const [Error, setError] = useState(null);

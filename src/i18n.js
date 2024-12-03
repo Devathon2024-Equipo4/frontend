@@ -122,6 +122,8 @@ i18n
             staturePlaceholder: "Height in centimeters",
             addressPlaceholder: "Example: Enchanted Forest #123",
             emailPlaceholder: "Example: elf@santa.com",
+            hired: "HIRED",
+            fired: "FIRED",
           },
         },
       },
@@ -242,6 +244,9 @@ i18n
             staturePlaceholder: "Altura en centímetros",
             addressPlaceholder: "Ejemplo: Bosque Encantado #123",
             emailPlaceholder: "Ejemplo: elfo@santa.com",
+            hired: "En servicio",
+            fired: "De baja",
+            
           },
           
         },
