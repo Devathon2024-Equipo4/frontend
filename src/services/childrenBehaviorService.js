@@ -38,6 +38,24 @@ export const updateChild = async (id, child) =>{
     handleError(error);
   }
 }
+
+export const createChild = async (child) =>{
+  try {
+    const response = await api.post(URI_CHILDREN, child);
+    return response.data.child;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export const deleteChild = async (id) =>{
+  try {
+    const response = await api.delete(URI_CHILDREN+"/"+id);
+    return response.data.child;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
   
 export const getTotalBehaviors = async () => {
   try {
