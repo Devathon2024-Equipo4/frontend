@@ -45,7 +45,7 @@ export const Map = () => {
   }, [coordinates, setPosition, setPopupName, ipDetails]);
 
   return (
-    <div className="h-[500px] w-[900px] mr-4">
+    <div className="min-h-[200px] min-w-[260px] m-4 border rounded-sm">
       <MapContainer
         center={position}
         zoom={12}
