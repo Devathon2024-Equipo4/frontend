@@ -10,7 +10,7 @@ const HomePage = () => {
           Dashboard Navidad
         </h1>
 
-        <div className="flex flex-row flex-wrap justify-between gap-10 items-start mt-10">
+        <div className="max-w-7xl min-h-[75vh] mx-auto flex flex-wrap justify-evenly gap-10 content-evenly m-10">
           <HomepageCard 
             title={"Gps"}
             route={"/gps"}

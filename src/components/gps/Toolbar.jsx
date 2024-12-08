@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCreateAddress } from "@/hooks/gps/useCreateGps";
 import { useRecentGps } from "@/hooks/gps/useRecentGps";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,8 @@ export const Toolbar = () => {
   const [recentSearchesVisible, setRecentSearchesVisible] = useState(false);
   const addresses = useGpsStore((state) => state.addresses);
   const [shouldSearch, setShouldSearch] = useState(false);
+  const searchBarRef = useRef(null);
+  const recentSearchesRef = useRef(null);
 
   useEffect(() => {
     if (shouldSearch) {
@@ -22,15 +24,31 @@ export const Toolbar = () => {
     }
   }, [shouldSearch, inputValue]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        recentSearchesVisible &&
+        !searchBarRef.current.contains(event.target) &&
+        !recentSearchesRef.current.contains(event.target)
+      ) {
+        setRecentSearchesVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [recentSearchesVisible]);
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     setRecentSearchesVisible(false);
   };
 
-  const handleSubmit =  (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     handleSearch();
-
   };
 
   const handleButtonClick = () => {
@@ -51,28 +69,27 @@ export const Toolbar = () => {
           toast.error("Error al guardar la dirección");
         },
       });
-    }else{
+    } else {
       setRecentSearchesVisible(true);
     }
-  }
+  };
 
-  const handleButtonClickHistory =  (value) => {
+  const handleButtonClickHistory = (value) => {
     setInputValue(value);
     setShouldSearch(true); 
-   
   };
 
   return (
     <>
-      <nav className="flex items-center justify-center h-10 p-1.5 bg-donJuan">
-        <div className="flex-1" />
-        <div className="min-w-[280px] max-[642px] flex justify-center grow-[2] shrink border ">
+      <nav className="min-w-[220px] flex items-center justify-center relative bg-akaroa">
+        <div className="sm:flex-1" />
+        <div ref={searchBarRef} className="flex justify-center grow-[2] shrink border border-stiletto rounded-sm">
           <form onSubmit={handleSubmit} className="flex items-center w-full">
             <Button
               disabled={isPending}
               type="submit"
               size="sm"
-              className="bg-accent/25 hover:bg-accent-25 h-7 px-2  rounded-none "
+              className="bg-accent/25 hover:bg-accent-25 h-7 px-2 rounded-none"
               onClick={handleButtonClick}
             >
               <SearchIcon className="size-4 text-white" />
@@ -81,32 +98,37 @@ export const Toolbar = () => {
               type="text"
               value={inputValue}
               onChange={handleInputChange}
-              onClick={handleButtonClick}
+              onClick={() => setRecentSearchesVisible(true)}
               placeholder="Busca una dirección"
-              className="h-7 w-full px-2 bg-transparent text-white placeholder:text-gray-400 focus:outline-none focus:border-transparent"
+              className="h-7 w-full px-2 bg-slate rounded-sm text-black placeholder:text-gray-400 focus:outline-none focus:border-transparent"
             />
           </form>
         </div>
-        <div className="flex-1" />
-      </nav>
-
-      <div  className={`fixed w-full flex items-center justify-center top-10 left-1/2 transform -translate-x-1/2   z-[9999] ${
-          recentSearchesVisible ? 'block' : 'hidden'
-        }`}>
+        <div className="sm:flex-1" />
+        <div
+          ref={recentSearchesRef}
+          className={`absolute flex items-center justify-center top-8 lg:top-12 z-[1001] ${
+            recentSearchesVisible ? "block" : "hidden"
+          }`}
+        >
           <div className="flex-1" />
-           <div className="min-w-[280px] max-[650px] grow-[2] shrink bg-[#453e3e] text-white p-4 rounded-md shadow-lg">
-          <ul className="space-y-2">
-            {addresses.map((result, index) => (
-              <li key={index} className="text-sm flex"  onClick={() => handleButtonClickHistory(result.address)} >
-                <HistoryIcon className="size-4 mr-2 text-white" />
-                <span>{result.address}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="min-w-[240px] sm:w-[450px] lg:w-[220px] grow-[2] shrink bg-akaroa/90  border border-stiletto p-2 rounded-md shadow-lg">
+            <ul className="space-y-2">
+              {addresses.map((result, index) => (
+                <li
+                  key={index}
+                  className="text-sm flex"
+                  onClick={() => handleButtonClickHistory(result.address)}
+                >
+                  <HistoryIcon className="size-4 mr-2 mt-0.5" />
+                  <span>{result.address}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="flex-1" />
-      </div>
-   
+        </div>
+      </nav>
     </>
   );
 };
