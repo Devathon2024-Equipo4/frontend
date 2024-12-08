@@ -24,16 +24,16 @@ export const Recent = () => {
     );
   }
   return (
-    <div className="flex flex-col mx-4 w-6/12">
+    <div className="flex flex-col pt-4">
      
      <h3>Resultados:</h3>
         <ul  className="">
           {Array.isArray(coordinates) && coordinates.length > 0 && coordinates.map((result, index) => (
-            <li key={index}  className="max-h-72 mb-2 overflow-y-auto border border-plantation  rounded-md bg-akaroa shadow-lg hover:bg-akaroa/80">
+            <li key={index}  className="max-h-72 w-min-[220px] m-1 border border-stiletto rounded-sm ring-inset ring-stiletto hover:ring-1">
               <button onClick={() => {
                 setPosition([result.lat, result.lon]);
               
-              }}  className="w-full text-left px-4 py-2 focus:outline-none" >
+              }}  className=" text-left px-4 py-2 focus:outline-none" >
                 {result.display_name}
               </button>
             </li>
