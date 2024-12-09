@@ -1,12 +1,13 @@
 import api from "@/utils/api";
 import { URI_BEHAVIOR, URI_CHILD_BEHAVIOR, URI_CHILDREN } from "./endpoints";
+import { handleError } from "@/utils/errorHandler";
 
 export const getTotalChildren = async () => {
   try {
     const response = await api.get(URI_CHILDREN);
     return response.data.children;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 };
 
@@ -16,7 +17,7 @@ export const getChildById = async (id) => {
     //console.log(response.data.child);
     return response.data.child;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 };
 
@@ -25,7 +26,7 @@ export const updateStatusChild = async (id) =>{
     const response = await api.patch(URI_CHILDREN+"/checkStatus/"+id);
     return response.data.child;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 }
 
@@ -34,7 +35,7 @@ export const updateChild = async (id, child) =>{
     const response = await api.patch(URI_CHILDREN+"/"+id, child);
     return response.data.child;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 }
 
@@ -61,7 +62,7 @@ export const getTotalBehaviors = async () => {
     const response = await api.get(URI_BEHAVIOR);
     return response.data.behaviors;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 };
 
@@ -70,7 +71,7 @@ export const getTotalChildBehavior = async () => {
     const response = await api.get(URI_CHILD_BEHAVIOR);
     return response.data.childBehaviors;
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 };
 
@@ -80,7 +81,7 @@ export const createChildBehavior = async (childBehavior) => {
     return response.data.childBehavior;
 
   } catch (error) {
-    throw new Error(error.response?.data?.message || error.message);
+    handleError(error);
   }
 };
 
@@ -90,7 +91,7 @@ export const editChildBehaviorApi = async (childId, behaviorId, newBehavior) =>{
     return response.data.childBehavior;
 
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 }
 
@@ -100,10 +101,10 @@ export const deleteChildBehaviorApi = async (childId, behaviorId, deletedChildBe
       URI_CHILD_BEHAVIOR + `/${childId}/${behaviorId}`,{data:{deletedChildBehavior},}
       
     );
-    console.log(response.data.childBehavior);
+    
     return response.data.childBehavior;
 
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error);
   }
 }

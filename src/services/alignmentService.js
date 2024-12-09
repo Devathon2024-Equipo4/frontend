@@ -1,18 +1,13 @@
 import api from "@/utils/api";
 import { URI_ALIGNMENTS } from "./endpoints";
+import { handleError } from "@/utils/errorHandler"; 
 
 export const getAlignments = async () => {
   try {
     const response = await api.get(URI_ALIGNMENTS);
     return response.data;
   } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
-    } else if (error.request) {
-      throw new Error('No se recibió respuesta del servidor');
-    } else {
-      throw new Error('Error en la configuración de la solicitud: ' + error.message);
-    }
+    handleError(error);
   }
 };  
 
@@ -21,13 +16,7 @@ export const createAlignment = async (name) => {
     const response = await api.post(URI_ALIGNMENTS, name);
     return response.data;
   } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
-    } else if (error.request) {
-      throw new Error('No se recibió respuesta del servidor');
-    } else {
-      throw new Error('Error en la configuración de la solicitud: ' + error.message);
-    }
+    handleError(error);
   }
 };
 
@@ -36,13 +25,7 @@ export const removeAlignment = async (id) => {
     const response = await api.delete(`${URI_ALIGNMENTS}/${id}`);
     return response.data;
   } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
-    } else if (error.request) {
-      throw new Error('No se recibió respuesta del servidor');
-    } else {
-      throw new Error('Error en la configuración de la solicitud: ' + error.message);
-    }
+    handleError(error);
   }
 };
 
@@ -53,12 +36,6 @@ export const updateAlignment = async (data) => {
       const response = await api.put(`${URI_ALIGNMENTS}/${id}`, { name });
       return response.data;
     } catch (error) {
-      if (error.response) {
-        throw new Error(error.response.data.message || 'Error en la respuesta del servidor');
-      } else if (error.request) {
-        throw new Error('No se recibió respuesta del servidor');
-      } else {
-        throw new Error('Error en la configuración de la solicitud: ' + error.message);
-      }
+      handleError(error);
     }
   };  
