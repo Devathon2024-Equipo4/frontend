@@ -14,7 +14,7 @@ const ElfRegistryPage = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] bg-gray pt-10 pb-10 px-10 sm:px-30 lg:px-40  font-DynaPuff">
+    <div className="w-full min-h-[calc(100vh-64px)] bg-gray pt-10 pb-10 px-10 sm:px-30 lg:px-40  font-DynaPuff ">
       <h1 className="text-stiletto text-6xl font-MountainsOfChristmas pt-10 text-center font-bold">
         {t("elf.title")}
       </h1>
