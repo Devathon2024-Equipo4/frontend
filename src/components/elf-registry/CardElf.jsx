@@ -38,15 +38,15 @@ export function CardElf() {
 
   if (isLoadingElves) {
     return (
-      <div className=" flex items-center justify-center mx-4 w-full">
-        <Loader className="animate-spin size-5 text-muted-foreground  " />
+      <div className=" flex items-center justify-center mt-[20%] h-full w-full overflow-hidden">
+        <Loader className="animate-spin size-5 text-muted-foreground " />
       </div>
     );
   }
 
   if (ErrorElves) {
     return (
-      <div className=" flex items-center justify-center mx-4 w-full">
+      <div className=" flex items-center justify-center mt-[20%] h-full w-full overflow-hidden">
         <TriangleAlertIcon className="size-5 mr-4 text-red-500" />
         {ErrorElves}
       </div>

@@ -1,4 +1,5 @@
 import { useCreateElf } from "@/hooks/elves/useCreateElf";
+import { useGetElves } from "@/hooks/elves/useGetElves";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -6,6 +7,7 @@ import { toast } from "sonner";
 export const useDialogElf = () => {
   const { t } = useTranslation();
   const { mutate: createElf, isPending: isCreateElf } = useCreateElf();
+  const { fetchElves } = useGetElves();
 
   const nameRef = useRef(null);
   const ageRef = useRef(null);
@@ -38,6 +40,7 @@ export const useDialogElf = () => {
       onSuccess: () => {
         toast.success(t("elf.elfRegistered"));
         resetForm();
+        fetchElves();
       },
       onError: () => {
         toast.error(t("Error al crear el elfo"));
