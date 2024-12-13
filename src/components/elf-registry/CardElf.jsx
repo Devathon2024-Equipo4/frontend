@@ -123,13 +123,13 @@ export function CardElf() {
               onClick={() => toggleStatus(elf.id, elf.status)}
             >
               {elf.status === "HIRED" ? "Dar de Baja" : "Reincorporar"}
-            </Button>
-            <Button 
+            </Button> 
+            {/* <Button 
               variant="active"
               onClick={() => handleDialog(elf)}
             >
               Editar
-            </Button>
+            </Button> */}
           </CardFooter>
         </Card>
       ))}
