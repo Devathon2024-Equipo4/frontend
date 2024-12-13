@@ -29,7 +29,7 @@ const DialogElf = ({ open, setOpen }) => {
         </DialogHeader>
         <div className="flex flex-col space-y-4 w-full">
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col space-y-4 w-full mb-4">
+            <div className="flex flex-col space-y-3 w-full mb-4">
               <Label className="font-DynaPuff">{t("elf.name")}</Label>
               <Input
                 disabled={isCreateElf}
@@ -40,20 +40,20 @@ const DialogElf = ({ open, setOpen }) => {
                 required
               />
             </div>
-            <div className="flex w-full space-x-4 mb-4">
-              <div className="flex flex-col space-y-4 w-full mb-4">
+            <div className="flex w-full space-x-4">
+              <div className="flex flex-col space-y-2 w-full mb-4">
                 <Label className="font-DynaPuff">{t("elf.age")}</Label>
                 <Input
                   disabled={isCreateElf}
                   ref={ageRef}
                   placeholder={t("elf.agePlaceholder")}
                   min="1"
-                  className="w-full text-xs font-DynaPuff"
+                  className="w.-full text-xs font-DynaPuff"
                   type="number"
                   required
                 />
               </div>
-              <div className="flex flex-col space-y-4 w-full mb-4">
+              <div className="flex flex-col space-y-2 w-full mb-4">
                 <Label className="font-DynaPuff">{t("elf.stature")}</Label>
                 <Input
                   disabled={isCreateElf}
@@ -67,8 +67,8 @@ const DialogElf = ({ open, setOpen }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col space-y-4 w-full mb-4">
-              <label className="font-DynaPuff">Gender</label>
+            <div className="flex flex-col space-y-2 w-full mb-4">
+              <label className="font-DynaPuff text-sm font-medium">Gender</label>
               <select
                 disabled={isCreateElf}
                 ref={genderRef}
@@ -82,7 +82,7 @@ const DialogElf = ({ open, setOpen }) => {
                 </option>
               </select>
             </div>
-            <div className="flex flex-col space-y-4 w-full mb-4">
+            <div className="flex flex-col space-y-2 w-full mb-4">
               <Label className="font-DynaPuff">{t("elf.address")}</Label>
               <Input
                 disabled={isCreateElf}
@@ -93,7 +93,7 @@ const DialogElf = ({ open, setOpen }) => {
                 required
               />
             </div>
-            <div className="flex flex-col space-y-4 w-full mb-4">
+            <div className="flex flex-col space-y-2 w-full mb-6">
               <Label className="font-DynaPuff">{t("elf.email")}</Label>
               <Input
                 disabled={isCreateElf}
@@ -104,7 +104,7 @@ const DialogElf = ({ open, setOpen }) => {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-center space-x-4">
               <Button
                 disabled={isCreateElf}
                 className=" font-DynaPuff tracking-wider"
